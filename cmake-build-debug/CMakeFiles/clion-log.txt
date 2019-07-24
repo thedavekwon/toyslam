@@ -1,0 +1,4 @@
+/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vr-lab/Dave/projects/toyslam
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
