@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/73/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/73/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vr-lab/Dave/projects/toyslam
+CMAKE_SOURCE_DIR = /home/dodo/Projects/toyslam
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
+CMAKE_BINARY_DIR = /home/dodo/Projects/toyslam/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/73/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/73/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles /home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles /home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ toyslam/fast:
 	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/build
 .PHONY : toyslam/fast
 
+bundleAdjustment.o: bundleAdjustment.cpp.o
+
+.PHONY : bundleAdjustment.o
+
+# target to build an object file
+bundleAdjustment.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o
+.PHONY : bundleAdjustment.cpp.o
+
+bundleAdjustment.i: bundleAdjustment.cpp.i
+
+.PHONY : bundleAdjustment.i
+
+# target to preprocess a source file
+bundleAdjustment.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/bundleAdjustment.cpp.i
+.PHONY : bundleAdjustment.cpp.i
+
+bundleAdjustment.s: bundleAdjustment.cpp.s
+
+.PHONY : bundleAdjustment.s
+
+# target to generate assembly for a file
+bundleAdjustment.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s
+.PHONY : bundleAdjustment.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... toyslam"
 	@echo "... edit_cache"
+	@echo "... bundleAdjustment.o"
+	@echo "... bundleAdjustment.i"
+	@echo "... bundleAdjustment.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

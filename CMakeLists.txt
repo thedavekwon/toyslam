@@ -12,5 +12,5 @@ find_package(OpenCV REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(G2O REQUIRED)
 
-add_executable(toyslam main.cpp)
+add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h)
 target_link_libraries(toyslam ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES})
