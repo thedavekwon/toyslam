@@ -1,6 +1,7 @@
 # cmake git ignore
 # https://github.com/github/gitignore/blob/master/CMake.gitignore
 
+/cmake-build-debug/*
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
