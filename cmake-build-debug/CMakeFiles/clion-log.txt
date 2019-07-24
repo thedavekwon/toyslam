@@ -1,4 +1,14 @@
-/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vr-lab/Dave/projects/toyslam
+/snap/clion/73/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/dodo/Projects/toyslam
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found SDL2: /usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
+-- Build files have been written to: /home/dodo/Projects/toyslam/cmake-build-debug
