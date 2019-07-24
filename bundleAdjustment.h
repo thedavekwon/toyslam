@@ -6,6 +6,12 @@
 #define TOYSLAM_BUNDLEADJUSTMENT_H
 
 #include <iostream>
+#include <cmath>
+#include <unordered_map>
+#include <unordered_set>
+
+#include <Eigen/StdVector>
+
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/solvers/cholmod/linear_solver_cholmod.h>
 #include <g2o/core/block_solver.h>

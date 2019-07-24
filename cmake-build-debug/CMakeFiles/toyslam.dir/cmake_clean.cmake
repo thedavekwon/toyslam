@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/toyslam.dir/main.cpp.o"
-  "CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
   "toyslam.pdb"
   "toyslam"
 )
