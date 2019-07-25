@@ -1,12 +1,20 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/features2d.hpp>
+#include "bundleAdjustment.h"
 
 const int MAX_FEATURES = 500;
 
 void extractFeature(cv::Mat &inputFrame, cv::Mat &outputFrame, std::vector<cv::KeyPoint> &kps, int featureType);
 
+int mainLoop();
+
 int main() {
+//    return mainLoop();
+    BA();
+}
+
+int mainLoop() {
     cv::VideoCapture cap("video.mp4");
 
     if (!cap.isOpened()) {
