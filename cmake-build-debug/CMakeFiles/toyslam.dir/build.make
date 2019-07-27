@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/81/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/81/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vr-lab/Dave/projects/toyslam
+CMAKE_SOURCE_DIR = /home/dodo/Projects/toyslam
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
+CMAKE_BINARY_DIR = /home/dodo/Projects/toyslam/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/toyslam.dir/depend.make
@@ -59,63 +59,76 @@ include CMakeFiles/toyslam.dir/flags.make
 
 CMakeFiles/toyslam.dir/main.cpp.o: CMakeFiles/toyslam.dir/flags.make
 CMakeFiles/toyslam.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/toyslam.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/toyslam.dir/main.cpp.o -c /home/vr-lab/Dave/projects/toyslam/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/toyslam.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/toyslam.dir/main.cpp.o -c /home/dodo/Projects/toyslam/main.cpp
 
 CMakeFiles/toyslam.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/toyslam.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vr-lab/Dave/projects/toyslam/main.cpp > CMakeFiles/toyslam.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dodo/Projects/toyslam/main.cpp > CMakeFiles/toyslam.dir/main.cpp.i
 
 CMakeFiles/toyslam.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/toyslam.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vr-lab/Dave/projects/toyslam/main.cpp -o CMakeFiles/toyslam.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dodo/Projects/toyslam/main.cpp -o CMakeFiles/toyslam.dir/main.cpp.s
 
 CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o: CMakeFiles/toyslam.dir/flags.make
 CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o: ../bundleAdjustment.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o -c /home/vr-lab/Dave/projects/toyslam/bundleAdjustment.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o -c /home/dodo/Projects/toyslam/bundleAdjustment.cpp
 
 CMakeFiles/toyslam.dir/bundleAdjustment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/toyslam.dir/bundleAdjustment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vr-lab/Dave/projects/toyslam/bundleAdjustment.cpp > CMakeFiles/toyslam.dir/bundleAdjustment.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dodo/Projects/toyslam/bundleAdjustment.cpp > CMakeFiles/toyslam.dir/bundleAdjustment.cpp.i
 
 CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vr-lab/Dave/projects/toyslam/bundleAdjustment.cpp -o CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dodo/Projects/toyslam/bundleAdjustment.cpp -o CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s
+
+CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o: CMakeFiles/toyslam.dir/flags.make
+CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o: ../featureExtractionandMatching.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o -c /home/dodo/Projects/toyslam/featureExtractionandMatching.cpp
+
+CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dodo/Projects/toyslam/featureExtractionandMatching.cpp > CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.i
+
+CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dodo/Projects/toyslam/featureExtractionandMatching.cpp -o CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.s
 
 # Object files for target toyslam
 toyslam_OBJECTS = \
 "CMakeFiles/toyslam.dir/main.cpp.o" \
-"CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
+"CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o" \
+"CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o"
 
 # External object files for target toyslam
 toyslam_EXTERNAL_OBJECTS =
 
 toyslam: CMakeFiles/toyslam.dir/main.cpp.o
 toyslam: CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o
+toyslam: CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o
 toyslam: CMakeFiles/toyslam.dir/build.make
-toyslam: /usr/local/lib/libopencv_dnn.so.3.4.6
-toyslam: /usr/local/lib/libopencv_videostab.so.3.4.6
-toyslam: /usr/local/lib/libopencv_superres.so.3.4.6
-toyslam: /usr/local/lib/libopencv_stitching.so.3.4.6
-toyslam: /usr/local/lib/libopencv_viz.so.3.4.6
-toyslam: /usr/local/lib/libopencv_shape.so.3.4.6
-toyslam: /usr/local/lib/libopencv_ml.so.3.4.6
-toyslam: /usr/local/lib/libopencv_objdetect.so.3.4.6
-toyslam: /usr/local/lib/libopencv_photo.so.3.4.6
-toyslam: /usr/local/lib/libopencv_calib3d.so.3.4.6
+toyslam: /usr/local/lib/libopencv_dnn.so.4.1.1
+toyslam: /usr/local/lib/libopencv_gapi.so.4.1.1
+toyslam: /usr/local/lib/libopencv_highgui.so.4.1.1
+toyslam: /usr/local/lib/libopencv_ml.so.4.1.1
+toyslam: /usr/local/lib/libopencv_objdetect.so.4.1.1
+toyslam: /usr/local/lib/libopencv_photo.so.4.1.1
+toyslam: /usr/local/lib/libopencv_stitching.so.4.1.1
+toyslam: /usr/local/lib/libopencv_video.so.4.1.1
+toyslam: /usr/local/lib/libopencv_videoio.so.4.1.1
 toyslam: /usr/local/lib/libpangolin.so
-toyslam: /usr/local/lib/libopencv_video.so.3.4.6
-toyslam: /usr/local/lib/libopencv_features2d.so.3.4.6
-toyslam: /usr/local/lib/libopencv_flann.so.3.4.6
-toyslam: /usr/local/lib/libopencv_highgui.so.3.4.6
-toyslam: /usr/local/lib/libopencv_videoio.so.3.4.6
-toyslam: /usr/local/lib/libopencv_imgcodecs.so.3.4.6
-toyslam: /usr/local/lib/libopencv_imgproc.so.3.4.6
-toyslam: /usr/local/lib/libopencv_core.so.3.4.6
-toyslam: /usr/lib/x86_64-linux-gnu/libGLU.so
+toyslam: /usr/local/lib/libopencv_imgcodecs.so.4.1.1
+toyslam: /usr/local/lib/libopencv_calib3d.so.4.1.1
+toyslam: /usr/local/lib/libopencv_features2d.so.4.1.1
+toyslam: /usr/local/lib/libopencv_flann.so.4.1.1
+toyslam: /usr/local/lib/libopencv_imgproc.so.4.1.1
+toyslam: /usr/local/lib/libopencv_core.so.4.1.1
 toyslam: /usr/lib/x86_64-linux-gnu/libGL.so
+toyslam: /usr/lib/x86_64-linux-gnu/libGLU.so
 toyslam: /usr/lib/x86_64-linux-gnu/libGLEW.so
+toyslam: /usr/lib/x86_64-linux-gnu/libEGL.so
 toyslam: /usr/lib/x86_64-linux-gnu/libwayland-client.so
 toyslam: /usr/lib/x86_64-linux-gnu/libwayland-egl.so
 toyslam: /usr/lib/x86_64-linux-gnu/libwayland-cursor.so
@@ -123,8 +136,12 @@ toyslam: /usr/lib/x86_64-linux-gnu/libSM.so
 toyslam: /usr/lib/x86_64-linux-gnu/libICE.so
 toyslam: /usr/lib/x86_64-linux-gnu/libX11.so
 toyslam: /usr/lib/x86_64-linux-gnu/libXext.so
+toyslam: /usr/lib/x86_64-linux-gnu/libpng.so
+toyslam: /usr/lib/x86_64-linux-gnu/libz.so
+toyslam: /usr/lib/x86_64-linux-gnu/libjpeg.so
+toyslam: /usr/lib/x86_64-linux-gnu/libtiff.so
 toyslam: CMakeFiles/toyslam.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable toyslam"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable toyslam"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/toyslam.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -137,6 +154,6 @@ CMakeFiles/toyslam.dir/clean:
 .PHONY : CMakeFiles/toyslam.dir/clean
 
 CMakeFiles/toyslam.dir/depend:
-	cd /home/vr-lab/Dave/projects/toyslam/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vr-lab/Dave/projects/toyslam /home/vr-lab/Dave/projects/toyslam /home/vr-lab/Dave/projects/toyslam/cmake-build-debug /home/vr-lab/Dave/projects/toyslam/cmake-build-debug /home/vr-lab/Dave/projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dodo/Projects/toyslam/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dodo/Projects/toyslam /home/dodo/Projects/toyslam /home/dodo/Projects/toyslam/cmake-build-debug /home/dodo/Projects/toyslam/cmake-build-debug /home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/toyslam.dir/depend
 

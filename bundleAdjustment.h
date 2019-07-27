@@ -1,5 +1,5 @@
 //
-// Created by dodo on 7/24/19.
+// Created by Do Hyung Kwon on 7/24/19.
 //
 
 #ifndef TOYSLAM_BUNDLEADJUSTMENT_H
@@ -26,7 +26,7 @@
 
 static constexpr double PIXEL_NOISE = 1.0;
 static constexpr double OUTLIER_RATIO = 0.0;
-static constexpr bool ROBUST_KERNEL = false;
+static constexpr bool ROBUST_KERNEL = true;
 static constexpr bool STRUCTURE_ONLY = false;
 static constexpr bool DENSE = false;
 

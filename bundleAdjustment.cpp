@@ -1,5 +1,5 @@
 //
-// Created by dodo on 7/24/19.
+// Created by Do Hyung Kwon on 7/24/19.
 //
 
 #include "bundleAdjustment.h"
@@ -158,7 +158,7 @@ int BA() {
                     e->setMeasurement(z);
                     // information Matrix
                     e->information() = Eigen::Matrix2d::Identity();
-                    if (!ROBUST_KERNEL) {
+                    if (ROBUST_KERNEL) {
                         auto *rk = new g2o::RobustKernelHuber;
                         e->setRobustKernel(rk);
                     }
