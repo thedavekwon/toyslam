@@ -12,8 +12,12 @@ int mainLoop() {
         std::cout << "Error opening video stream!" << std::endl;
         return -1;
     }
-    cv::Mat prevFrame, prevkFrame, prevDes;
+    cv::Mat prevFrame, prevkFrame, prevDes, prevR, prevT;
     std::vector<cv::KeyPoint> prevKps;
+
+    cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
+    cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
+
     while (true) {
         cv::Mat frame, kFrame, des;
         std::vector<cv::KeyPoint> kps;
@@ -23,7 +27,7 @@ int mainLoop() {
         extractFeature(frame, kFrame, kps, des, 1);
 
         cv::imshow("Frame", kFrame);
-        cv::waitKey(16.66);
+        cv::waitKey(1);
 
         if (frameCnt) {
             cv::Ptr<cv::FlannBasedMatcher> matcher = cv::makePtr<cv::FlannBasedMatcher>(
@@ -37,11 +41,30 @@ int mainLoop() {
                 }
             }
 
-            cv::Mat img_matches;
-            cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
-                    cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-            cv::imshow("Good Matches", img_matches);
-            cv::waitKey();
+            cv::Mat R, t;
+            poseEstimation2D2D(prevKps, kps, good_matches, R, t);
+
+            cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
+
+            if (frameCnt > 2) {
+                prevT = prevT + 4 * prevR * t;
+                prevR = prevR * R;
+
+                int x = int(prevT.at<double>(0)) + 300;
+                int y = int(prevT.at<double>(1)) + 300;
+                cv::circle(trajectory, cv::Point(x, y), 1, CV_RGB(255, 0, 0), 4);
+                imshow("Trajectory", trajectory);
+            }
+            if (SHOW) {
+                cv::Mat img_matches;
+                cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
+                                cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+                cv::imshow("Good Matches", img_matches);
+                cv::waitKey();
+            }
+
+            prevR = R;
+            prevT = t;
         }
 
         prevFrame = frame;

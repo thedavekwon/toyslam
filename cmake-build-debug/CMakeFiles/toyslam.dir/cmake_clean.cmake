@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/toyslam.dir/main.cpp.o"
   "CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
   "CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o"
+  "CMakeFiles/toyslam.dir/motionEstimation.cpp.o"
+  "CMakeFiles/toyslam.dir/cameraParamters.cpp.o"
   "toyslam.pdb"
   "toyslam"
 )

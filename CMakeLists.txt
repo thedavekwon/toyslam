@@ -26,7 +26,9 @@ LIST(APPEND G2O_LIBRARIES
 
 #add_executable(toyslam main.cpp)
 add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h
-                                featureExtractionandMatching.cpp featureExtractionandMatching.h)
+                                featureExtractionandMatching.cpp featureExtractionandMatching.h
+                                motionEstimation.cpp motionEstimation.h
+                                cameraParamters.cpp cameraParamters.h)
 
 message("${G2O_LIBRARIES}")
 message("123")

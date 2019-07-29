@@ -150,6 +150,33 @@ bundleAdjustment.cpp.s:
 	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/bundleAdjustment.cpp.s
 .PHONY : bundleAdjustment.cpp.s
 
+cameraParamters.o: cameraParamters.cpp.o
+
+.PHONY : cameraParamters.o
+
+# target to build an object file
+cameraParamters.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/cameraParamters.cpp.o
+.PHONY : cameraParamters.cpp.o
+
+cameraParamters.i: cameraParamters.cpp.i
+
+.PHONY : cameraParamters.i
+
+# target to preprocess a source file
+cameraParamters.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/cameraParamters.cpp.i
+.PHONY : cameraParamters.cpp.i
+
+cameraParamters.s: cameraParamters.cpp.s
+
+.PHONY : cameraParamters.s
+
+# target to generate assembly for a file
+cameraParamters.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/cameraParamters.cpp.s
+.PHONY : cameraParamters.cpp.s
+
 featureExtractionandMatching.o: featureExtractionandMatching.cpp.o
 
 .PHONY : featureExtractionandMatching.o
@@ -204,6 +231,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+motionEstimation.o: motionEstimation.cpp.o
+
+.PHONY : motionEstimation.o
+
+# target to build an object file
+motionEstimation.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/motionEstimation.cpp.o
+.PHONY : motionEstimation.cpp.o
+
+motionEstimation.i: motionEstimation.cpp.i
+
+.PHONY : motionEstimation.i
+
+# target to preprocess a source file
+motionEstimation.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/motionEstimation.cpp.i
+.PHONY : motionEstimation.cpp.i
+
+motionEstimation.s: motionEstimation.cpp.s
+
+.PHONY : motionEstimation.s
+
+# target to generate assembly for a file
+motionEstimation.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/motionEstimation.cpp.s
+.PHONY : motionEstimation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -216,12 +270,18 @@ help:
 	@echo "... bundleAdjustment.o"
 	@echo "... bundleAdjustment.i"
 	@echo "... bundleAdjustment.s"
+	@echo "... cameraParamters.o"
+	@echo "... cameraParamters.i"
+	@echo "... cameraParamters.s"
 	@echo "... featureExtractionandMatching.o"
 	@echo "... featureExtractionandMatching.i"
 	@echo "... featureExtractionandMatching.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... motionEstimation.o"
+	@echo "... motionEstimation.i"
+	@echo "... motionEstimation.s"
 .PHONY : help
 
 

@@ -94,6 +94,12 @@
 		<Unit filename="/home/dodo/Projects/toyslam/bundleAdjustment.h">
 			<Option target="toyslam"/>
 		</Unit>
+		<Unit filename="/home/dodo/Projects/toyslam/cameraParamters.cpp">
+			<Option target="toyslam"/>
+		</Unit>
+		<Unit filename="/home/dodo/Projects/toyslam/cameraParamters.h">
+			<Option target="toyslam"/>
+		</Unit>
 		<Unit filename="/home/dodo/Projects/toyslam/featureExtractionandMatching.cpp">
 			<Option target="toyslam"/>
 		</Unit>
@@ -101,6 +107,12 @@
 			<Option target="toyslam"/>
 		</Unit>
 		<Unit filename="/home/dodo/Projects/toyslam/main.cpp">
+			<Option target="toyslam"/>
+		</Unit>
+		<Unit filename="/home/dodo/Projects/toyslam/motionEstimation.cpp">
+			<Option target="toyslam"/>
+		</Unit>
+		<Unit filename="/home/dodo/Projects/toyslam/motionEstimation.h">
 			<Option target="toyslam"/>
 		</Unit>
 		<Unit filename="/home/dodo/Projects/toyslam/CMakeLists.txt">

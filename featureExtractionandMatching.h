@@ -9,8 +9,11 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/features2d.hpp>
 
+#include "motionEstimation.h"
+
 const int MAX_FEATURES = 500;
 const float RATIO_THRESH = 0.9f;
+const bool SHOW = false;
 
 int mainLoop();
 void extractFeature(cv::Mat &inputFrame, cv::Mat &outputFrame, std::vector<cv::KeyPoint> &kps, cv::Mat &des, int featureType);

@@ -5,8 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dodo/Projects/toyslam/bundleAdjustment.cpp" "/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/bundleAdjustment.cpp.o"
+  "/home/dodo/Projects/toyslam/cameraParamters.cpp" "/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/cameraParamters.cpp.o"
   "/home/dodo/Projects/toyslam/featureExtractionandMatching.cpp" "/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/featureExtractionandMatching.cpp.o"
   "/home/dodo/Projects/toyslam/main.cpp" "/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/main.cpp.o"
+  "/home/dodo/Projects/toyslam/motionEstimation.cpp" "/home/dodo/Projects/toyslam/cmake-build-debug/CMakeFiles/toyslam.dir/motionEstimation.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
