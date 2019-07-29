@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
+find_package(Eigen REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(G2O REQUIRED)
@@ -34,4 +35,4 @@ message("${G2O_LIBRARIES}")
 message("123")
 
 target_link_libraries(toyslam ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
-        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES})
+        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES})

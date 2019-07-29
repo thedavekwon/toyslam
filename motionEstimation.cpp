@@ -9,14 +9,14 @@ cv::Point2d pixel2cam(const cv::Point2d &p, const cv::Mat &K) {
     return cv::Point2d(
             (p.x - K.at<double>(0, 2)) / K.at<double>(0, 0),
             (p.y - K.at<double>(1, 2)) / K.at<double>(1, 1)
-            );
+    );
 }
 
-void poseEstimation2D2D(std::vector<cv::KeyPoint> kps1,
-                          std::vector<cv::KeyPoint> kps2,
-                          std::vector<cv::DMatch> matches,
-                          cv::Mat &R,
-                          cv::Mat &t) {
+void poseEstimation2D2D(const std::vector<cv::KeyPoint> &kps1,
+                        const std::vector<cv::KeyPoint> &kps2,
+                        const std::vector<cv::DMatch> &matches,
+                        cv::Mat &R,
+                        cv::Mat &t) {
     cv::Mat K = loadCalibrationMatrix(0);
 
     std::vector<cv::Point2f> points1;
@@ -42,4 +42,72 @@ void poseEstimation2D2D(std::vector<cv::KeyPoint> kps1,
     cv::recoverPose(essential_matrix, points1, points2, R, t, focal_length, principal_point);
     if (DEBUG) std::cout << "R is " << std::endl << R << std::endl;
     if (DEBUG) std::cout << "t is " << std::endl << t << std::endl;
+}
+
+void poseEstimation3D2D(const std::vector<cv::KeyPoint> &kps1,
+                        const std::vector<cv::KeyPoint> &kps2,
+                        const std::vector<cv::DMatch> &matches,
+                        const cv::Mat &K,
+                        cv::Mat &R,
+                        cv::Mat &t,
+                        std::vector<cv::Point3f> &points_3d,
+                        std::vector<cv::Point2f> &points_2d) {
+    cv::Mat r;
+    cv::solvePnP(points_3d, points_2d, K, cv::Mat(), r, t, false);
+    cv::Rodrigues(r, R);
+    if (DEBUG) std::cout << "R is " << std::endl << R << std::endl;
+    if (DEBUG) std::cout << "t is " << std::endl << t << std::endl;
+    bundleAdjustment3d2d(points_3d, points_2d, K, R, t);
+}
+
+void triangulation(const std::vector<cv::KeyPoint> &kps1,
+                   const std::vector<cv::KeyPoint> &kps2,
+                   const std::vector<cv::DMatch> &matches,
+                   const cv::Mat &K,
+                   cv::Mat &R,
+                   cv::Mat &t,
+                   std::vector<cv::Point3f> &points_3d,
+                   std::vector<cv::Point2f> &points_2d) {
+    points_3d.clear();
+    points_2d.clear();
+    cv::Mat T1 = (cv::Mat_<float>(3, 4) << 1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0);
+    cv::Mat T2;
+    cv::hconcat(R, t, T2);
+
+    std::vector<cv::Point2f> points1, points2;
+    for (auto &match : matches) {
+        points1.push_back(pixel2cam(kps1[match.queryIdx].pt, K));
+        points2.push_back(pixel2cam(kps2[match.trainIdx].pt, K));
+        points_2d.push_back(kps1[match.queryIdx].pt);
+        //points_2d.push_back(pixel2cam(kps1[match.queryIdx].pt, K));
+    }
+
+    cv::Mat triangulatedPoints;
+    cv::triangulatePoints(T1, T2, points1, points2, triangulatedPoints);
+
+    for (int i = 0; i < triangulatedPoints.cols; i++) {
+        cv::Mat x = triangulatedPoints.col(i);
+        x /= x.at<float>(3, 0);
+        cv::Point3d p(
+                x.at<float>(0, 0),
+                x.at<float>(1, 0),
+                x.at<float>(2, 0)
+        );
+        points_3d.push_back(p);
+    }
+}
+
+void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
+                                         const std::vector<cv::KeyPoint> &kps2,
+                                         const std::vector<cv::DMatch> &matches,
+                                         cv::Mat &R,
+                                         cv::Mat &t) {
+    cv::Mat K = loadCalibrationMatrix(0);
+    std::vector<cv::Point3f> points_3d;
+    std::vector<cv::Point2f> points_2d;
+
+    triangulation(kps1, kps2, matches, K, R, t, points_3d, points_2d);
+    poseEstimation3D2D(kps1, kps2, matches, K, R, t, points_3d, points_2d);
 }

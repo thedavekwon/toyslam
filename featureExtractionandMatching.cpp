@@ -4,9 +4,11 @@
 
 #include "featureExtractionandMatching.h"
 
+cv::VideoCapture getCapture();
+
 int mainLoop() {
     int frameCnt = 0;
-    cv::VideoCapture cap("video.mp4");
+    cv::VideoCapture cap = getCapture("video.mp4");
 
     if (!cap.isOpened()) {
         std::cout << "Error opening video stream!" << std::endl;
@@ -31,13 +33,14 @@ int mainLoop() {
 
         if (frameCnt) {
             cv::Ptr<cv::FlannBasedMatcher> matcher = cv::makePtr<cv::FlannBasedMatcher>(
-                    cv::makePtr<cv::flann::LshIndexParams>(5, 10, 2));
+                    cv::makePtr<cv::flann::LshIndexParams>(20, 10, 2)
+            );
             std::vector<std::vector<cv::DMatch>> knn_matches;
             matcher->knnMatch(des, prevDes, knn_matches, 3);
             std::vector<cv::DMatch> good_matches;
-            for (size_t i = 0; i < knn_matches.size(); i++) {
-                if (knn_matches[i][0].distance < RATIO_THRESH * knn_matches[i][1].distance) {
-                    good_matches.push_back(knn_matches[i][0]);
+            for (auto &knn_match : knn_matches) {
+                if (knn_match[0].distance < RATIO_THRESH * knn_match[1].distance) {
+                    good_matches.push_back(knn_match[0]);
                 }
             }
 
@@ -51,7 +54,7 @@ int mainLoop() {
                 prevR = prevR * R;
 
                 int x = int(prevT.at<double>(0)) + 300;
-                int y = int(prevT.at<double>(1)) + 300;
+                int y = int(prevT.at<double>(2)) + 300;
                 cv::circle(trajectory, cv::Point(x, y), 1, CV_RGB(255, 0, 0), 4);
                 imshow("Trajectory", trajectory);
             }
@@ -77,6 +80,11 @@ int mainLoop() {
     cap.release();
     cv::destroyAllWindows();
     return 0;
+}
+
+cv::VideoCapture getCapture(std::string s) {
+    cv::VideoCapture cap(s);
+    return cap;
 }
 
 void extractFeature(cv::Mat &frame, cv::Mat &kFrame, std::vector<cv::KeyPoint> &kps, cv::Mat &des, int featureType) {

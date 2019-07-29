@@ -10,6 +10,9 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <opencv2/core.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+
 #include <Eigen/StdVector>
 
 #include <g2o/core/sparse_optimizer.h>
@@ -24,12 +27,19 @@
 
 #include <suitesparse/cholmod.h>
 
+#include "cameraParamters.h"
+
 static constexpr double PIXEL_NOISE = 1.0;
 static constexpr double OUTLIER_RATIO = 0.0;
 static constexpr bool ROBUST_KERNEL = true;
 static constexpr bool STRUCTURE_ONLY = false;
 static constexpr bool DENSE = false;
+static constexpr int OPTIMIZE_COUNT = 100;
 
-int BA();
+int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
+                     const std::vector<cv::Point2f> points_2d,
+                     const cv::Mat &K,
+                     const cv::Mat &R,
+                     const cv::Mat &t);
 
 #endif //TOYSLAM_BUNDLEADJUSTMENT_H

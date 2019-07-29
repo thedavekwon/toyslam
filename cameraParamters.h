@@ -8,7 +8,9 @@
 #include <opencv2/core.hpp>
 
 cv::Mat loadCalibrationMatrix(int type);
+
 cv::Point2d loadPrincipalPoint(int type);
+
 double loadFocalLength(int type);
 
 
