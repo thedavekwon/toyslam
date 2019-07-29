@@ -8,7 +8,7 @@ cv::VideoCapture getCapture();
 
 int mainLoop() {
     int frameCnt = 0;
-    cv::VideoCapture cap = getCapture("video.mp4");
+    cv::VideoCapture cap = getCapture("data/video.mp4");
 
     if (!cap.isOpened()) {
         std::cout << "Error opening video stream!" << std::endl;

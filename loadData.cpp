@@ -5,15 +5,21 @@
 #include "loadData.h"
 
 void loadKitti(std::string path) {
-    cv::dataset
-    cv::Mat left = cv::imread(, IMCOLOR_READ);
-    cv::Mat right = cv::imread(, IMCOLOR_READ);
+    char filename1[100];
+    char filename2[100];
+    sprintf(filename1, "/data/kitti/image_2/%06d.png", 0);
+    sprintf(filename2, "/data/kitti/image_3/%06d.png", 0);
+
+    cv::Mat left = cv::imread(filename1);
+    cv::Mat right = cv::imread(filename2);
+    cv::Mat out;
 
     if (left.empty() || right.empty()) {
         std::cerr << "Left or Right is empty" << std::endl;
     }
 
-    cv::Mat left_for_matcher, right_for_matcher, left_disp, right_disp, filtered_disp, solved_disp, solved_filter_disp;
-    cv::Mat conf_map = cv::Mat(left.rows, left.cols, CV_8U);
-    conf_map = cv::Scalar(255);
+    auto stereo = cv::StereoBM::create(16, 15);
+    stereo->compute(left, right, out);
+    cv::imshow("disparity map", out);
+    cv::waitKey(0);
 }

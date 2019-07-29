@@ -1,8 +1,8 @@
-/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vr-lab/Dave/projects/toyslam
+/snap/clion/81/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/dodo/Projects/toyslam
 -- No preference for use of exported Eigen CMake configuration set, and no hints for include directory provided. Defaulting to preferring an installed/exported Eigen CMake configuration if available.
 -- Found installed version of Eigen: /usr/local/share/eigen3/cmake
 cxsparse;cholmod;g2o_cli;g2o_ext_freeglut_minimal;g2o_simulator;g2o_solver_slam2d_linear;g2o_types_icp;g2o_types_slam2d;g2o_core;g2o_interface;g2o_solver_csparse;g2o_solver_structure_only;g2o_types_sba;g2o_types_slam3d;g2o_csparse_extension;g2o_opengl_helper;g2o_solver_dense;g2o_stuff;g2o_types_sclam2d;g2o_parser;g2o_solver_pcg;g2o_types_data;g2o_types_sim3
 123
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
+-- Build files have been written to: /home/dodo/Projects/toyslam/cmake-build-debug
