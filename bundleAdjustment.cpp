@@ -203,21 +203,21 @@ int sampleBA() {
     point_num = 0;
     sum_diff2 = 0;
 
-    for (auto it = pointid_2_trueid.begin(); it != pointid_2_trueid.end(); it++) {
-        auto v_it = optimizer.vertices().find(it->first);
+    for (auto & it : pointid_2_trueid) {
+        auto v_it = optimizer.vertices().find(it.first);
         if (v_it == optimizer.vertices().end()) {
-            std::cerr << "Vertex " << it->first << " not in graph!" << std::endl;
+            std::cerr << "Vertex " << it.first << " not in graph!" << std::endl;
             exit(-1);
         }
 
         auto *v_p = dynamic_cast<g2o::VertexSBAPointXYZ *>(v_it->second);
         if (v_p == nullptr) {
-            std::cerr << "Vertex " << it->first << "is not a Point XYZ!" << std::endl;
+            std::cerr << "Vertex " << it.first << "is not a Point XYZ!" << std::endl;
             exit(-1);
         }
 
-        Eigen::Vector3d diff = v_p->estimate() - true_points[it->second];
-        if (inliers.find(it->first) == inliers.end()) continue;
+        Eigen::Vector3d diff = v_p->estimate() - true_points[it.second];
+        if (inliers.find(it.first) == inliers.end()) continue;
         sum_diff2 += diff.dot(diff);
         point_num++;
     }
@@ -226,20 +226,14 @@ int sampleBA() {
     std::cout << std::endl;
 }
 
-int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
-                     const std::vector<cv::Point2f> points_2d,
+int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
+                     const std::vector<cv::Point2f> &points_2d,
                      const cv::Mat &K,
-                     const cv::Mat &R,
-                     const cv::Mat &t) {
-    std::cout << "PIXEL_NOISE: " << PIXEL_NOISE << std::endl;
-    std::cout << "OUTLIER_RATIO: " << OUTLIER_RATIO << std::endl;
-    std::cout << "ROBUST_KERNEL: " << ROBUST_KERNEL << std::endl;
-    std::cout << "STRUCTURE_ONLY: " << STRUCTURE_ONLY << std::endl;
-    std::cout << "DENSE: " << DENSE << std::endl;
-
+                     cv::Mat &R,
+                     cv::Mat &t) {
     // optimizer
     g2o::SparseOptimizer optimizer;
-    optimizer.setVerbose(true);
+    optimizer.setVerbose(false);
     // BlockSolver<BlockSolverTraits<6, 3>> operates on the blocks of Hessian Matrix
     // Hessian Matrix: square matrix of second-order partial derivatives of a scalar-valued function, or scalar field.
     std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType> linearSolver;
@@ -268,8 +262,8 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
     Eigen::Matrix3d R_mat;
     R_mat <<
           R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2),
-            R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
-            R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
+          R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
+           R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
     pose->setId(0);
     pose->setEstimate(
             g2o::SE3Quat(
@@ -281,10 +275,7 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
 
     // add map points
     int point_id = 1;
-    std::unordered_map<int, int> pointid_2_trueid;
-    std::unordered_set<int> inliers;
-
-    for (auto &p : points_3d) {
+    for (const auto &p : points_3d) {
         auto *point = new g2o::VertexSBAPointXYZ();
         point->setId(point_id++);
         point->setEstimate(Eigen::Vector3d(p.x, p.y, p.z));
@@ -293,10 +284,10 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
     }
 
     int edge_id = 1;
-    for (auto &p : points_2d) {
+    for (const auto &p : points_2d) {
         auto *edge = new g2o::EdgeProjectXYZ2UV();
         edge->setId(edge_id);
-        edge->setVertex(0, dynamic_cast<g2o::VertexSBAPointXYZ *> (optimizer.vertex(point_id)));
+        edge->setVertex(0, dynamic_cast<g2o::VertexSBAPointXYZ *> (optimizer.vertex(edge_id)));
         edge->setVertex(1, pose);
         edge->setMeasurement(Eigen::Vector2d(p.x, p.y));
         edge->setParameterId(0, 0);
@@ -307,8 +298,15 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
 
     optimizer.initializeOptimization();
     optimizer.setVerbose(true);
-
     optimizer.optimize(OPTIMIZE_COUNT);
 
-    std::cout << "T=" << std::endl << Eigen::Isometry3d(pose->estimate()).matrix() << std::endl;
+    auto T = Eigen::Isometry3d(pose->estimate()).matrix();
+
+    std::cout << T << std::endl;
+
+    t = (cv::Mat_<float>(3, 1) << T(0, 3), T(1, 3), T(2, 3));
+    R = (cv::Mat_<float>(3, 3) <<
+            T(0, 0), T(0, 1), T(0, 2),
+            T(1, 0), T(1, 1), T(1, 2),
+            T(2, 0), T(2, 1), T(2, 2));
 }

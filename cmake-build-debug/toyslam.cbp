@@ -155,9 +155,11 @@
 			<Option target="toyslam"/>
 		</Unit>
 		<Unit filename="/home/vr-lab/Dave/projects/toyslam/loadData.cpp">
+			<Option target="toyslam"/>
 			<Option target="loadData"/>
 		</Unit>
 		<Unit filename="/home/vr-lab/Dave/projects/toyslam/loadData.h">
+			<Option target="toyslam"/>
 			<Option target="loadData"/>
 		</Unit>
 		<Unit filename="/home/vr-lab/Dave/projects/toyslam/main.cpp">
@@ -171,6 +173,9 @@
 		</Unit>
 		<Unit filename="/home/vr-lab/Dave/projects/toyslam/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vr-lab/Dave/projects/toyslam/cmake/FindCSparse.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
 		</Unit>
 		<Unit filename="/home/vr-lab/Dave/projects/toyslam/cmake/FindCholmod.cmake">
 			<Option virtualFolder="CMake Files\cmake\"/>

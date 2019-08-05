@@ -2,7 +2,6 @@
 #include "featureExtractionandMatching.h"
 
 int main() {
-    mainLoop();
-    //BA();
+    sequenceFromKitti();
 }
 

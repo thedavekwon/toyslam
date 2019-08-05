@@ -12,14 +12,20 @@
 #include <opencv2/features2d.hpp>
 
 #include "motionEstimation.h"
+#include "loadData.h"
 
 const int MAX_FEATURES = 500;
-const float RATIO_THRESH = 0.4f;
-const bool SHOW = true;
+const float RATIO_THRESH = 0.7f;
 
-int mainLoop();
+void sequenceFromKitti();
+
+void sequenceFromVideo();
+
 cv::VideoCapture getCapture(std::string s);
+
 void extractFeature(cv::Mat &inputFrame, cv::Mat &outputFrame, std::vector<cv::KeyPoint> &kps, cv::Mat &des,
                     int featureType);
+
+std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des);
 
 #endif //TOYSLAM_FEATUREEXTRACTIONANDMATCHING_H

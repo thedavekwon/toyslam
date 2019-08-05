@@ -223,6 +223,7 @@ loadData.o: loadData.cpp.o
 
 # target to build an object file
 loadData.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/loadData.cpp.o
 	$(MAKE) -f CMakeFiles/loadData.dir/build.make CMakeFiles/loadData.dir/loadData.cpp.o
 .PHONY : loadData.cpp.o
 
@@ -232,6 +233,7 @@ loadData.i: loadData.cpp.i
 
 # target to preprocess a source file
 loadData.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/loadData.cpp.i
 	$(MAKE) -f CMakeFiles/loadData.dir/build.make CMakeFiles/loadData.dir/loadData.cpp.i
 .PHONY : loadData.cpp.i
 
@@ -241,6 +243,7 @@ loadData.s: loadData.cpp.s
 
 # target to generate assembly for a file
 loadData.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/loadData.cpp.s
 	$(MAKE) -f CMakeFiles/loadData.dir/build.make CMakeFiles/loadData.dir/loadData.cpp.s
 .PHONY : loadData.cpp.s
 

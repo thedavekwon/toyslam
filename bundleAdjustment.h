@@ -22,6 +22,7 @@
 #include <g2o/core/robust_kernel_impl.h>
 #include <g2o/core/optimization_algorithm_levenberg.h>
 #include <g2o/solvers/dense/linear_solver_dense.h>
+//#include <g2o/solvers/csparse/linear_solver_csparse.h>
 #include <g2o/types/sba/types_six_dof_expmap.h>
 #include <g2o/solvers/structure_only/structure_only_solver.h>
 
@@ -34,12 +35,12 @@ static constexpr double OUTLIER_RATIO = 0.0;
 static constexpr bool ROBUST_KERNEL = true;
 static constexpr bool STRUCTURE_ONLY = false;
 static constexpr bool DENSE = false;
-static constexpr int OPTIMIZE_COUNT = 100;
+static constexpr int OPTIMIZE_COUNT = 70;
 
-int bundleAdjustment3d2d(const std::vector<cv::Point3f> points_3d,
-                     const std::vector<cv::Point2f> points_2d,
+int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
+                     const std::vector<cv::Point2f> &points_2d,
                      const cv::Mat &K,
-                     const cv::Mat &R,
-                     const cv::Mat &t);
+                     cv::Mat &R,
+                     cv::Mat &t);
 
 #endif //TOYSLAM_BUNDLEADJUSTMENT_H

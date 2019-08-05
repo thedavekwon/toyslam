@@ -35,8 +35,8 @@ void triangulation(const std::vector<cv::KeyPoint> &kps1,
                    const std::vector<cv::KeyPoint> &kps2,
                    const std::vector<cv::DMatch> &matches,
                    const cv::Mat &K,
-                   cv::Mat &R,
-                   cv::Mat &t,
+                   const cv::Mat &R,
+                   const cv::Mat &t,
                    std::vector<cv::Point3f> &points_3d,
                    std::vector<cv::Point3f> &points_2d);
 

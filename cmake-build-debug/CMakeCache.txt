@@ -402,7 +402,7 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=14
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=3
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=5
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -550,6 +550,8 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 EIGEN_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Eigen3_DIR
 Eigen3_DIR-ADVANCED:INTERNAL=1
+//Details about finding CSPARSE
+FIND_PACKAGE_MESSAGE_DETAILS_CSPARSE:INTERNAL=[/usr/include/suitesparse][/usr/lib/x86_64-linux-gnu/libcxsparse.so][v()]
 //Details about finding Eigen
 FIND_PACKAGE_MESSAGE_DETAILS_Eigen:INTERNAL=[/usr/local/include/eigen3][v3.3.4()]
 //Details about finding OpenCV
@@ -562,5 +564,5 @@ FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
-SDL2_LIBRARY_TEMP:INTERNAL=/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
+SDL2_LIBRARY_TEMP:INTERNAL=/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2main.a;/usr/local/lib/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
 
