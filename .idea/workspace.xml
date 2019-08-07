@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="toyslam" targetName="toyslam" />
       <config projectName="toyslam" targetName="loadData" />
+      <config projectName="toyslam" targetName="toyslam" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,36 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c8ec786-53c5-494c-bd34-5a605ae22bfd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cmake/FindCSparse.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bundleAdjustment.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/bundleAdjustment.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bundleAdjustment.h" beforeDir="false" afterPath="$PROJECT_DIR$/bundleAdjustment.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cameraParamters.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cameraParamters.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/toyslam" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/toyslam" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/toyslam.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/toyslam.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/featureExtractionandMatching.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/featureExtractionandMatching.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/featureExtractionandMatching.h" beforeDir="false" afterPath="$PROJECT_DIR$/featureExtractionandMatching.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loadData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/loadData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loadData.h" beforeDir="false" afterPath="$PROJECT_DIR$/loadData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/motionEstimation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/motionEstimation.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/motionEstimation.h" beforeDir="false" afterPath="$PROJECT_DIR$/motionEstimation.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,17 +29,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1358" />
-    <option name="y" value="-4" />
-    <option name="width" value="1011" />
-    <option name="height" value="1065" />
-  </component>
   <component name="ProjectId" id="1OZncklCFY9WARKyD0KltiCuBXq" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/slambook" />
+    <property name="last_opened_file_path" value="$USER_HOME$/slambook/ch8/LKFlow" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -127,7 +92,8 @@
       <workItem from="1565024470824" duration="85000" />
       <workItem from="1565024688880" duration="304000" />
       <workItem from="1565025008932" duration="456000" />
-      <workItem from="1565031530191" duration="5597000" />
+      <workItem from="1565031530191" duration="5648000" />
+      <workItem from="1565116024451" duration="762000" />
     </task>
     <servers />
   </component>
