@@ -8,16 +8,16 @@ cv::VideoCapture getCapture();
 
 void sequenceFromKitti() {
     int frameCnt = 0;
-    cv::Mat prevFrame, prevkFrame, prevDes, prevR, prevT;
+    cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
     std::vector<cv::KeyPoint> prevKps;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
     cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
+    cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
-    for (auto &cur : kitti_range(100)) {
+    for (auto &cur : kitti_range(200)) {
         cv::Mat frame, kFrame, des;
         std::vector<cv::KeyPoint> kps;
-        std::cout << cur.first << " " << cur.second << std::endl;
         loadKittiMono(cur, frame, 0);
         if (frame.empty()) break;
 
@@ -27,20 +27,21 @@ void sequenceFromKitti() {
         cv::waitKey(1);
 
         if (frameCnt) {
-            std::vector<cv::DMatch> good_matches = get_matches(prevDes, des);
+            std::vector<cv::DMatch> good_matches = get_matches_ORB(prevDes, des);
 
             cv::Mat R, t;
             poseEstimation2D2D(prevKps, kps, good_matches, R, t);
-             //poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, R, t);
-
-            cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
-
+            //poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, R, t);
+            if (frameCnt == 1) {
+                poseR = R.clone();
+                poseT = t.clone();
+            }
             if (frameCnt > 2) {
-                prevT = prevT + prevR * t;
-                prevR = prevR * R;
+                poseT = poseT + loadScale(frameCnt, 0) * poseR * t;
+                poseR = R * poseR;
 
-                int x = int(prevT.at<double>(0)) + 300;
-                int y = int(prevT.at<double>(2)) + 100;
+                int x = int(poseT.at<double>(0)) + 300;
+                int y = int(poseT.at<double>(2)) + 100;
                 std::cout << x << " " << y << std::endl;
                 cv::circle(trajectory, cv::Point(x, y), 1, CV_RGB(255, 0, 0), 4);
                 imshow("Trajectory", trajectory);
@@ -50,11 +51,8 @@ void sequenceFromKitti() {
                 cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
                                 cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
                 cv::imshow("Good Matches", img_matches);
-                cv::waitKey();
+                cv::waitKey(1);
             }
-
-            prevR = R;
-            prevT = t;
         }
 
         prevFrame = frame;
@@ -65,6 +63,30 @@ void sequenceFromKitti() {
     }
 
     cv::destroyAllWindows();
+}
+
+std::vector<cv::DMatch> filterMatches(std::vector<cv::DMatch> &matches) {
+    std::vector<cv::DMatch> filterd_matches;
+    float min_dist = std::numeric_limits<float>::max(), max_dist = 0;
+
+    for (auto &match: matches) {
+        min_dist = std::min(min_dist, match.distance);
+        max_dist = std::max(max_dist, match.distance);
+    }
+
+    for (auto &match: matches) {
+        if (match.distance <= std::max(2*min_dist, 30.0f)) {
+            filterd_matches.push_back(match);
+        }
+    }
+    return filterd_matches;
+}
+
+std::vector<cv::DMatch> get_matches_ORB(const cv::Mat &prevDes, const cv::Mat &des) {
+    cv::Ptr<cv::BFMatcher> matcher = cv::makePtr<cv::BFMatcher>(cv::NORM_HAMMING2, true);
+    std::vector<cv::DMatch> matches;
+    matcher->match(des, prevDes, matches);
+    return filterMatches(matches);;
 }
 
 std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des) {
@@ -79,12 +101,12 @@ std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des) 
             good_matches.push_back(knn_match[0]);
         }
     }
-    return good_matches;
+    return filterMatches(good_matches);;
 }
 
 void sequenceFromVideo() {
     int frameCnt = 0;
-    cv::VideoCapture cap = getCapture("data/video.mp4");
+    cv::VideoCapture cap = getVideoCapture("data/video.mp4");
 
     if (!cap.isOpened()) {
         std::cout << "Error opening video stream!" << std::endl;
@@ -141,7 +163,7 @@ void sequenceFromVideo() {
                 cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
                                 cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
                 cv::imshow("Good Matches", img_matches);
-                cv::waitKey();
+                cv::waitKey(1);
             }
 
             prevR = R;
@@ -159,7 +181,7 @@ void sequenceFromVideo() {
     cv::destroyAllWindows();
 }
 
-cv::VideoCapture getCapture(std::string s) {
+cv::VideoCapture getVideoCapture(std::string s) {
     cv::VideoCapture cap(s);
     return cap;
 }

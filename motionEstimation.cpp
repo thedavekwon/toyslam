@@ -33,7 +33,7 @@ void poseEstimation2D2D(const std::vector<cv::KeyPoint> &kps1,
     cv::Point2d principal_point = loadPrincipalPoint(1);
     double focal_length = loadFocalLength(1);
 
-    cv::Mat essential_matrix = cv::findEssentialMat(points1, points2, focal_length, principal_point, cv::RANSAC, 0.999);
+    cv::Mat essential_matrix = cv::findEssentialMat(points1, points2, focal_length, principal_point, cv::RANSAC, 0.99);
     if (DEBUG) std::cout << "essential_matrix is " << std::endl << essential_matrix << std::endl;
 
     cv::Mat homography_matrix = cv::findHomography(points1, points2, cv::RANSAC, 3);

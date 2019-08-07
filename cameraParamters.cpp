@@ -12,8 +12,6 @@ cv::Mat loadCalibrationMatrix(int type) {
                 0, 0, 1);
 }
 
-
-
 cv::Point2d loadPrincipalPoint(int type) {
     if (type == 0) return cv::Point2d(
                 360 / 2,
@@ -26,4 +24,28 @@ cv::Point2d loadPrincipalPoint(int type) {
 double loadFocalLength(int type) {
     if (type == 0) return 100.0;
     else return 718.8560;
+}
+
+double loadScale(int frameId, int type) {
+    std::ifstream poses("./tmp/images/poses/00.txt");
+    std::string info;
+    double x, y, z;
+    double prevX, prevY, prevZ;
+    while (frameId--) {
+        std::getline(poses, info);
+        prevX = x;
+        prevY = y;
+        prevZ = z;
+
+        std::istringstream parser(info);
+        for (int j = 0; j < 12; j++) {
+            parser >> z;
+            if (j == 7) y = z;
+            if (j == 3) x = z;
+        }
+    }
+
+    double scale = sqrt(pow(x-prevX, 2) + pow(y-prevY, 2) + pow(z-prevZ, 2)) ;
+    std::cout << scale << std::endl;
+    return scale;
 }

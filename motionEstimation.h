@@ -46,4 +46,5 @@ void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
                                          cv::Mat &R,
                                          cv::Mat &t);
 
+
 #endif //TOYSLAM_MOTIONESTIMATION_H

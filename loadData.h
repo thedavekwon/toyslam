@@ -23,9 +23,9 @@ private:
     int idx = 0;
 
     void storeString() {
-        sprintf(tmp, "./data/tmp/images/00/image_0/%06d.png", idx);
+        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
         filenameLeft = tmp;
-        sprintf(tmp, "./data/tmp/images/00/image_1/%06d.png", idx);
+        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
         filenameRight = tmp;
     }
 
@@ -72,7 +72,7 @@ public:
     }
 };
 
-const bool SHOW = true;
+const bool SHOW = false;
 
 void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out);
 

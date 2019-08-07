@@ -6,6 +6,7 @@
 #define TOYSLAM_FEATUREEXTRACTIONANDMATCHING_H
 
 #include <iostream>
+#include <limits>
 #include <string>
 
 #include <opencv2/opencv.hpp>
@@ -21,11 +22,13 @@ void sequenceFromKitti();
 
 void sequenceFromVideo();
 
-cv::VideoCapture getCapture(std::string s);
+cv::VideoCapture getVideoCapture(std::string s);
 
 void extractFeature(cv::Mat &inputFrame, cv::Mat &outputFrame, std::vector<cv::KeyPoint> &kps, cv::Mat &des,
                     int featureType);
 
 std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des);
+
+std::vector<cv::DMatch> get_matches_ORB(const cv::Mat &prevDes, const cv::Mat &des);
 
 #endif //TOYSLAM_FEATUREEXTRACTIONANDMATCHING_H
