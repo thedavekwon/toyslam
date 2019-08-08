@@ -23,9 +23,11 @@ private:
     int idx = 0;
 
     void storeString() {
-        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
+//        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
         filenameLeft = tmp;
-        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
+//        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
         filenameRight = tmp;
     }
 

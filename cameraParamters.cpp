@@ -16,9 +16,7 @@ cv::Point2d loadPrincipalPoint(int type) {
     if (type == 0) return cv::Point2d(
                 360 / 2,
                 480 / 2);
-    else return cv::Point2d(
-                1241 / 2,
-                 376 / 2);
+    else return cv::Point2d(607.1928, 185.2157);
 }
 
 double loadFocalLength(int type) {
@@ -27,7 +25,8 @@ double loadFocalLength(int type) {
 }
 
 double loadScale(int frameId, int type) {
-    std::ifstream poses("./tmp/images/poses/00.txt");
+//    std::ifstream poses("./tmp/images/poses/00.txt");
+    std::ifstream poses("./data/dataset/poses/00.txt");
     std::string info;
     double x, y, z;
     double prevX, prevY, prevZ;
@@ -48,4 +47,18 @@ double loadScale(int frameId, int type) {
     double scale = sqrt(pow(x-prevX, 2) + pow(y-prevY, 2) + pow(z-prevZ, 2)) ;
     std::cout << scale << std::endl;
     return scale;
+}
+
+cv::Point2f loadTruePose(int frameId) {
+    std::ifstream poses("./data/dataset/poses/00.txt");
+    std::string info;
+    float x, y;
+    while (frameId--) std::getline(poses, info);
+
+    std::istringstream parser(info);
+    for (int j = 0; j < 12; j++) {
+        parser >> y;
+        if (j == 3) x = y;
+    }
+    return cv::Point2f(x+300, y+100);
 }

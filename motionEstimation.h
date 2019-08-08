@@ -21,6 +21,7 @@ cv::Point2d pixel2cam(const cv::Point2d &p, const cv::Mat &K);
 void poseEstimation2D2D(const std::vector<cv::KeyPoint> &kps1,
                         const std::vector<cv::KeyPoint> &kps2,
                         const std::vector<cv::DMatch> &matches,
+                        cv::Mat &mask,
                         cv::Mat &R,
                         cv::Mat &t);
 
@@ -43,8 +44,14 @@ void triangulation(const std::vector<cv::KeyPoint> &kps1,
 void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
                                          const std::vector<cv::KeyPoint> &kps2,
                                          const std::vector<cv::DMatch> &matches,
+                                         cv::Mat &mask,
                                          cv::Mat &R,
                                          cv::Mat &t);
 
+void poseEstimationOpticalFlow(const std::vector<cv::Point2f> &points1,
+                               const std::vector<cv::Point2f> &points2,
+                               cv::Mat &mask,
+                               cv::Mat &R,
+                               cv::Mat &t);
 
 #endif //TOYSLAM_MOTIONESTIMATION_H

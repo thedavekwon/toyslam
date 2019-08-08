@@ -2,6 +2,6 @@
 #include "featureExtractionandMatching.h"
 
 int main() {
-    sequenceFromKitti();
+    sequenceFromKittiOpticalFlow();
 }
 

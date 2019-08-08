@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="toyslam" targetName="loadData" />
       <config projectName="toyslam" targetName="toyslam" />
+      <config projectName="toyslam" targetName="loadData" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,6 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c8ec786-53c5-494c-bd34-5a605ae22bfd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cameraParamters.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cameraParamters.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cameraParamters.h" beforeDir="false" afterPath="$PROJECT_DIR$/cameraParamters.h" afterDir="false" />
@@ -39,6 +40,7 @@
       <change beforePath="$PROJECT_DIR$/featureExtractionandMatching.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/featureExtractionandMatching.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/featureExtractionandMatching.h" beforeDir="false" afterPath="$PROJECT_DIR$/featureExtractionandMatching.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/loadData.h" beforeDir="false" afterPath="$PROJECT_DIR$/loadData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/motionEstimation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/motionEstimation.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/motionEstimation.h" beforeDir="false" afterPath="$PROJECT_DIR$/motionEstimation.h" afterDir="false" />
     </list>
@@ -123,6 +125,8 @@
       <workItem from="1565116024451" duration="762000" />
       <workItem from="1565212432367" duration="1634000" />
       <workItem from="1565214858257" duration="4085000" />
+      <workItem from="1565288935772" duration="216000" />
+      <workItem from="1565289172031" duration="8089000" />
     </task>
     <servers />
   </component>

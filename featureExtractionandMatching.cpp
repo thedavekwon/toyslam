@@ -9,19 +9,21 @@ cv::VideoCapture getCapture();
 void sequenceFromKitti() {
     int frameCnt = 0;
     cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
+    cv::Point2f truePose;
     std::vector<cv::KeyPoint> prevKps;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
     cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
     cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
-    for (auto &cur : kitti_range(200)) {
+    for (auto &cur : kitti_range(4540)) {
         cv::Mat frame, kFrame, des;
         std::vector<cv::KeyPoint> kps;
         loadKittiMono(cur, frame, 0);
         if (frame.empty()) break;
 
-        extractFeature(frame, kFrame, kps, des, 1);
+        std::vector<cv::Point2f> keyPoints;
+        extractFeature(frame, kFrame, kps, keyPoints, des, 1);
 
         cv::imshow("Frame", kFrame);
         cv::waitKey(1);
@@ -29,21 +31,24 @@ void sequenceFromKitti() {
         if (frameCnt) {
             std::vector<cv::DMatch> good_matches = get_matches_ORB(prevDes, des);
 
-            cv::Mat R, t;
-            poseEstimation2D2D(prevKps, kps, good_matches, R, t);
-            //poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, R, t);
+            cv::Mat R, t, mask;
+            poseEstimation2D2D(prevKps, kps, good_matches, mask,R, t);
+            // poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, R, t);
+            // poseEstimationOpticalFlow(points1, points2, mask, R, t);
             if (frameCnt == 1) {
                 poseR = R.clone();
                 poseT = t.clone();
             }
             if (frameCnt > 2) {
-                poseT = poseT + loadScale(frameCnt, 0) * poseR * t;
+                poseT = poseT + loadScale(frameCnt, 0) * (poseR * t);
                 poseR = R * poseR;
+                truePose = loadTruePose(frameCnt);
 
                 int x = int(poseT.at<double>(0)) + 300;
                 int y = int(poseT.at<double>(2)) + 100;
-                std::cout << x << " " << y << std::endl;
-                cv::circle(trajectory, cv::Point(x, y), 1, CV_RGB(255, 0, 0), 4);
+                std::cout << frameCnt << " " << x << " " << y << std::endl;
+                cv::circle(trajectory, cv::Point2f(x, y), 1, CV_RGB(255, 0, 0), 2);
+                cv::circle(trajectory, truePose, 1, CV_RGB(0, 0, 255), 2);
                 imshow("Trajectory", trajectory);
             }
             if (SHOW) {
@@ -61,7 +66,85 @@ void sequenceFromKitti() {
         prevKps = kps;
         frameCnt++;
     }
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+}
 
+void sequenceFromKittiOpticalFlow() {
+    int frameCnt = 0;
+    cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
+    cv::Point2f truePose;
+    std::vector<cv::KeyPoint> prevKps;
+    std::vector<cv::Point2f> prevKeyPoints;
+    std::vector<cv::Point2f> keyPoints;
+
+    cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
+    cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
+    cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
+
+    for (auto &cur : kitti_range(4540)) {
+        cv::Mat frame, kFrame, des;
+        std::vector<cv::KeyPoint> kps;
+        loadKittiMono(cur, frame, 0);
+        if (frame.empty()) break;
+
+        // cv::imshow("Frame", kFrame);
+        cv::waitKey(1);
+
+        if (frameCnt == 0) {
+            extractFeature(frame, kFrame, kps, keyPoints, des, 2);
+        }
+
+        if (frameCnt) {
+            cv::Mat R, t, mask;
+            if (frameCnt == 1) {
+                std::vector<uchar> status;
+                featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                poseEstimationOpticalFlow(prevKeyPoints, keyPoints, mask, R, t);
+                poseR = R.clone();
+                poseT = t.clone();
+            }
+            if (frameCnt > 2) {
+                std::vector<uchar> status;
+                featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                poseEstimationOpticalFlow(prevKeyPoints, keyPoints, mask, R, t);
+
+                poseT = poseT + loadScale(frameCnt, 0) * (poseR * t);
+                poseR = R * poseR;
+                truePose = loadTruePose(frameCnt);
+
+                if (keyPoints.size() < MIN_FEATURE_THRESHOLD) {
+                    std::cout << "before: " << keyPoints.size() << " ";
+                    extractFeature(prevFrame, prevkFrame, prevKps, keyPoints, prevDes, 2);
+                    std::cout << "after: " << keyPoints.size() << std::endl;
+                    featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                    std::cout << "aafter: " << keyPoints.size() << std::endl;
+                }
+
+                int x = int(poseT.at<double>(0)) + 300;
+                int y = int(poseT.at<double>(2)) + 100;
+                //std::cout << frameCnt << " " << x << " " << y << std::endl;
+                cv::circle(trajectory, cv::Point2f(x, y), 1, CV_RGB(255, 0, 0), 2);
+                cv::circle(trajectory, truePose, 1, CV_RGB(0, 0, 255), 2);
+                imshow("Trajectory", trajectory);
+            }
+            if (SHOW) {
+                cv::Mat img_matches;
+                cv::imshow("Good Matches", img_matches);
+                cv::waitKey(1);
+            }
+        }
+
+        prevFrame = frame.clone();
+        prevkFrame = kFrame.clone();
+        prevDes = des.clone();
+        std::cout << prevKeyPoints.size() << " " << keyPoints.size() <<  std::endl;
+        prevKeyPoints = keyPoints;
+        std::cout << prevKeyPoints.size() << " " << keyPoints.size() <<  std::endl;
+        prevKps = kps;
+        frameCnt++;
+    }
+    cv::waitKey(0);
     cv::destroyAllWindows();
 }
 
@@ -112,50 +195,47 @@ void sequenceFromVideo() {
         std::cout << "Error opening video stream!" << std::endl;
         return;
     }
-    cv::Mat prevFrame, prevkFrame, prevDes, prevR, prevT;
+    cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
+    cv::Point2f truePose;
     std::vector<cv::KeyPoint> prevKps;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
     cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
+    cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
-    while (true) {
+    for (auto &cur : kitti_range(4540)) {
         cv::Mat frame, kFrame, des;
         std::vector<cv::KeyPoint> kps;
-        cap >> frame;
+        loadKittiMono(cur, frame, 0);
         if (frame.empty()) break;
 
-        extractFeature(frame, kFrame, kps, des, 1);
+        std::vector<cv::Point2f> keyPoints;
+        extractFeature(frame, kFrame, kps, keyPoints, des, 1);
 
         cv::imshow("Frame", kFrame);
         cv::waitKey(1);
 
         if (frameCnt) {
-            cv::Ptr<cv::FlannBasedMatcher> matcher = cv::makePtr<cv::FlannBasedMatcher>(
-                    cv::makePtr<cv::flann::LshIndexParams>(16, 32, 2)
-            );
-            std::vector<std::vector<cv::DMatch>> knn_matches;
-            matcher->knnMatch(des, prevDes, knn_matches, 3);
-            std::vector<cv::DMatch> good_matches;
-            for (auto &knn_match : knn_matches) {
-                if (knn_match[0].distance < RATIO_THRESH * knn_match[1].distance) {
-                    good_matches.push_back(knn_match[0]);
-                }
+            std::vector<cv::DMatch> good_matches = get_matches_ORB(prevDes, des);
+
+            cv::Mat R, t, mask;
+            //poseEstimation2D2D(prevKps, kps, good_matches, mask,R, t);
+            poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, mask, R, t);
+
+            if (frameCnt == 1) {
+                poseR = R.clone();
+                poseT = t.clone();
             }
-
-            cv::Mat R, t;
-            // poseEstimation2D2D(prevKps, kps, good_matches, R, t);
-            poseEstimation3D2DwithTriangulation(prevKps, kps, good_matches, R, t);
-
-            cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
-
             if (frameCnt > 2) {
-                prevT = prevT + prevR * t;
-                prevR = prevR * R;
+                poseT = poseT + loadScale(frameCnt, 0) * (poseR * t);
+                poseR = R * poseR;
+                truePose = loadTruePose(frameCnt);
 
-                int x = int(prevT.at<double>(0)) + 300;
-                int y = int(prevT.at<double>(2)) + 100;
-                //std::cout << x << " " << y << std::endl;
-                cv::circle(trajectory, cv::Point(x, y), 1, CV_RGB(255, 0, 0), 3);
+                int x = int(poseT.at<double>(0)) + 300;
+                int y = int(poseT.at<double>(2)) + 100;
+                std::cout << frameCnt << " " << x << " " << y << std::endl;
+                cv::circle(trajectory, cv::Point2f(x, y), 1, CV_RGB(255, 0, 0), 2);
+                cv::circle(trajectory, truePose, 1, CV_RGB(0, 0, 255), 2);
                 imshow("Trajectory", trajectory);
             }
             if (SHOW) {
@@ -165,9 +245,6 @@ void sequenceFromVideo() {
                 cv::imshow("Good Matches", img_matches);
                 cv::waitKey(1);
             }
-
-            prevR = R;
-            prevT = t;
         }
 
         prevFrame = frame;
@@ -176,7 +253,7 @@ void sequenceFromVideo() {
         prevKps = kps;
         frameCnt++;
     }
-
+    cv::waitKey(0);
     cap.release();
     cv::destroyAllWindows();
 }
@@ -186,9 +263,42 @@ cv::VideoCapture getVideoCapture(std::string s) {
     return cap;
 }
 
-void extractFeature(cv::Mat &frame, cv::Mat &kFrame, std::vector<cv::KeyPoint> &kps, cv::Mat &des, int featureType) {
-    cv::Ptr<cv::Feature2D> fet;
-    fet = cv::ORB::create(MAX_FEATURES);
-    fet->detectAndCompute(frame, cv::noArray(), kps, des);
-    cv::drawKeypoints(frame, kps, kFrame);
+void extractFeature(cv::Mat &frame, cv::Mat &kFrame, std::vector<cv::KeyPoint> &kps, std::vector<cv::Point2f> &points,
+        cv::Mat &des, int featureType) {
+    if (featureType == 1) {
+        cv::Ptr<cv::Feature2D> fet;
+        fet = cv::ORB::create(MAX_FEATURES);
+        fet->detectAndCompute(frame, cv::noArray(),kps, des);
+        cv::drawKeypoints(frame, kps, kFrame);
+    } else if (featureType == 2) {
+        cv::FAST(frame, kps, 20, true);
+        cv::KeyPoint::convert(kps, points, std::vector<int>());
+        cv::drawKeypoints(frame, kps, kFrame);
+    }
+}
+
+void featureTrackingWithOpticalFlow(const cv::Mat &prevFrame, const cv::Mat &frame, std::vector<cv::Point2f> &prevPoints,
+        std::vector<cv::Point2f> &points, std::vector<uchar>& status) {
+    std::vector<float> error;
+    // default window size for the calcOpticalFlowPyrLK
+    auto winSize = cv::Size(21, 21);
+    // termination criteria for iterative algorithms
+    // default criterion for the calcOpticalFlowPyrLK
+    auto criterion = cv::TermCriteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, 30, 0.01);
+    // Calculates an optical flow for a sparse feature set using the iterative Lucas-Kanade method with pyramids.
+    cv::calcOpticalFlowPyrLK(prevFrame, frame, prevPoints, points, status, error, winSize, 3, criterion, 0, 0.001);
+
+    // filter out failed at Tracking
+    int indexCorrection = 0;
+    for (size_t i = 0; i < status.size(); i++) {
+        cv::Point2f pt = points.at(i- indexCorrection);
+        if ((status.at(i) == 0)||(pt.x<0)||(pt.y<0))	{
+            if((pt.x<0)||(pt.y<0))	{
+                status.at(i) = 0;
+            }
+            prevPoints.erase (prevPoints.begin() + (i - indexCorrection));
+            points.erase (points.begin() + (i - indexCorrection));
+            indexCorrection++;
+        }
+    }
 }

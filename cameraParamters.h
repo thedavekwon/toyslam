@@ -19,4 +19,6 @@ double loadFocalLength(int type);
 
 double loadScale(int frameId, int type);
 
+cv::Point2f loadTruePose(int frameId);
+
 #endif //TOYSLAM_CAMERAPARAMTERS_H

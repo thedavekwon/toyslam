@@ -2,6 +2,7 @@
 # https://github.com/github/gitignore/blob/master/CMake.gitignore
 
 /cmake-build-debug/*
+/cmake-build-debug/CMakeFiles
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
