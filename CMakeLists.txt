@@ -35,9 +35,6 @@ add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h
 
 add_executable(loadData loadData.cpp loadData.h)
 
-message("${G2O_LIBRARIES}")
-message("123")
-
 target_link_libraries(toyslam ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
         ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES})
 

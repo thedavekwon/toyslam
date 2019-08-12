@@ -82,7 +82,7 @@ void sequenceFromKittiOpticalFlow() {
     cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
     cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
-    for (auto &cur : kitti_range(4540)) {
+    for (auto &cur : kitti_range(200)) {
         cv::Mat frame, kFrame, des;
         std::vector<cv::KeyPoint> kps;
         loadKittiMono(cur, frame, 0);
@@ -114,11 +114,11 @@ void sequenceFromKittiOpticalFlow() {
                 truePose = loadTruePose(frameCnt);
 
                 if (keyPoints.size() < MIN_FEATURE_THRESHOLD) {
-                    std::cout << "before: " << keyPoints.size() << " ";
-                    extractFeature(prevFrame, prevkFrame, prevKps, keyPoints, prevDes, 2);
-                    std::cout << "after: " << keyPoints.size() << std::endl;
+                    if (DEBUG) std::cout << "before: " << prevKeyPoints.size() << " " << keyPoints.size() << " ";
+                    extractFeature(prevFrame, prevkFrame, prevKps, prevKeyPoints, prevDes, 2);
+                    if (DEBUG) std::cout << "after: " << prevKeyPoints.size() << " " << keyPoints.size() << " ";
                     featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
-                    std::cout << "aafter: " << keyPoints.size() << std::endl;
+                    if (DEBUG) std::cout << "aafter: " << prevKeyPoints.size() << " " << keyPoints.size() << std::endl;
                 }
 
                 int x = int(poseT.at<double>(0)) + 300;
@@ -138,9 +138,7 @@ void sequenceFromKittiOpticalFlow() {
         prevFrame = frame.clone();
         prevkFrame = kFrame.clone();
         prevDes = des.clone();
-        std::cout << prevKeyPoints.size() << " " << keyPoints.size() <<  std::endl;
         prevKeyPoints = keyPoints;
-        std::cout << prevKeyPoints.size() << " " << keyPoints.size() <<  std::endl;
         prevKps = kps;
         frameCnt++;
     }

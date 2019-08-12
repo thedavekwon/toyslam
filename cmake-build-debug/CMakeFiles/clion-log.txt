@@ -1,8 +1,33 @@
-/home/vr-lab/Documents/clion-2018.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vr-lab/Dave/projects/toyslam
+/snap/clion/81/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/dodo/Projects/toyslam
+-- The C compiler identification is GNU 7.4.0
+-- The CXX compiler identification is GNU 7.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- No preference for use of exported Eigen CMake configuration set, and no hints for include directory provided. Defaulting to preferring an installed/exported Eigen CMake configuration if available.
 -- Found installed version of Eigen: /usr/local/share/eigen3/cmake
-cxsparse;cholmod;g2o_cli;g2o_ext_freeglut_minimal;g2o_simulator;g2o_solver_slam2d_linear;g2o_types_icp;g2o_types_slam2d;g2o_core;g2o_interface;g2o_solver_csparse;g2o_solver_structure_only;g2o_types_sba;g2o_types_slam3d;g2o_csparse_extension;g2o_opengl_helper;g2o_solver_dense;g2o_stuff;g2o_types_sclam2d;g2o_parser;g2o_solver_pcg;g2o_types_data;g2o_types_sim3
-123
+-- Found Eigen: /usr/local/include/eigen3 (found version "3.3.4") 
+-- Found OpenCV: /usr/local (found version "4.1.1") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found SDL2: /usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread  
+-- Found CSPARSE: /usr/include/suitesparse  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/vr-lab/Dave/projects/toyslam/cmake-build-debug
+-- Build files have been written to: /home/dodo/Projects/toyslam/cmake-build-debug

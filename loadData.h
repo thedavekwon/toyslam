@@ -23,16 +23,16 @@ private:
     int idx = 0;
 
     void storeString() {
-//        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
-        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
+        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
+//        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
         filenameLeft = tmp;
-//        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
-        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
+        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
+//        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
         filenameRight = tmp;
     }
 
 public:
-    explicit kittiLoader(int idx_) : idx{idx_} {
+    explicit kittiLoader(int idx_) : idx{idx_}{
         storeString();
     };
 
@@ -74,7 +74,7 @@ public:
     }
 };
 
-const bool SHOW = false;
+const bool SHOW = true;
 
 void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out);
 

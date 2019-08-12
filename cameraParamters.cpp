@@ -25,8 +25,8 @@ double loadFocalLength(int type) {
 }
 
 double loadScale(int frameId, int type) {
-//    std::ifstream poses("./tmp/images/poses/00.txt");
-    std::ifstream poses("./data/dataset/poses/00.txt");
+    std::ifstream poses("./tmp/images/poses/00.txt");
+//    std::ifstream poses("./data/dataset/poses/00.txt");
     std::string info;
     double x, y, z;
     double prevX, prevY, prevZ;
@@ -50,7 +50,8 @@ double loadScale(int frameId, int type) {
 }
 
 cv::Point2f loadTruePose(int frameId) {
-    std::ifstream poses("./data/dataset/poses/00.txt");
+    std::ifstream poses("./tmp/images/poses/00.txt");
+//    std::ifstream poses("./data/dataset/poses/00.txt");
     std::string info;
     float x, y;
     while (frameId--) std::getline(poses, info);
