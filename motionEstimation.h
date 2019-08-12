@@ -13,8 +13,7 @@
 
 #include "cameraParamters.h"
 #include "bundleAdjustment.h"
-
-const bool DEBUG = false;
+#include "constants.h"
 
 cv::Point2d pixel2cam(const cv::Point2d &p, const cv::Mat &K);
 

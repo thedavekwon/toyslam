@@ -15,6 +15,8 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 
+#include "constants.h"
+
 class kittiLoader {
 private:
     std::string filenameLeft;
@@ -23,11 +25,11 @@ private:
     int idx = 0;
 
     void storeString() {
-        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
-//        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
+//        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
         filenameLeft = tmp;
-        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
-//        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
+//        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
         filenameRight = tmp;
     }
 
@@ -73,8 +75,6 @@ public:
         return kittiLoader(end_n);
     }
 };
-
-const bool SHOW = true;
 
 void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out);
 

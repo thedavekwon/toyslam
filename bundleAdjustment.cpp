@@ -50,7 +50,7 @@ int sampleBA() {
 
     // optimizer
     g2o::SparseOptimizer optimizer;
-    optimizer.setVerbose(true);
+    optimizer.setVerbose(DEBUG);
     // BlockSolver<BlockSolverTraits<6, 3>> operates on the blocks of Hessian Matrix
     // Hessian Matrix: square matrix of second-order partial derivatives of a scalar-valued function, or scalar field.
     std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType> linearSolver;
@@ -182,7 +182,7 @@ int sampleBA() {
     }
     std::cout << std::endl;
     optimizer.initializeOptimization();
-    optimizer.setVerbose(true);
+    optimizer.setVerbose(DEBUG);
     if (STRUCTURE_ONLY) {
         g2o::StructureOnlySolver<3> structure_only_ba;
         std::cout << "Performing structure only BA:" << std::endl;
@@ -233,7 +233,7 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
                      cv::Mat &t) {
     // optimizer
     g2o::SparseOptimizer optimizer;
-    optimizer.setVerbose(false);
+    optimizer.setVerbose(DEBUG);
     // BlockSolver<BlockSolverTraits<6, 3>> operates on the blocks of Hessian Matrix
     // Hessian Matrix: square matrix of second-order partial derivatives of a scalar-valued function, or scalar field.
     std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType> linearSolver;
@@ -297,12 +297,12 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
     }
 
     optimizer.initializeOptimization();
-    optimizer.setVerbose(true);
+    optimizer.setVerbose(DEBUG);
     optimizer.optimize(OPTIMIZE_COUNT);
 
     auto T = Eigen::Isometry3d(pose->estimate()).matrix();
 
-    std::cout << T << std::endl;
+    if (DEBUG) std::cout << T << std::endl;
 
     t = (cv::Mat_<float>(3, 1) << T(0, 3), T(1, 3), T(2, 3));
     R = (cv::Mat_<float>(3, 3) <<

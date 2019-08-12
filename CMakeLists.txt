@@ -31,7 +31,9 @@ add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h
                                 featureExtractionandMatching.cpp featureExtractionandMatching.h
                                 motionEstimation.cpp motionEstimation.h
                                 cameraParamters.cpp cameraParamters.h
-                                loadData.cpp loadData.h)
+                                loadData.cpp loadData.h
+                                constants.h)
+
 
 add_executable(loadData loadData.cpp loadData.h)
 

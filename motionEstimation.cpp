@@ -22,7 +22,7 @@ void poseEstimationOpticalFlow(const std::vector<cv::Point2f> &points1,
     cv::Mat essential_matrix = cv::findEssentialMat(points2, points1, focal_length, principal_point,
                                                     cv::RANSAC, 0.999, 1.0, mask);
     if (DEBUG) std::cout << "essential_matrix is " << std::endl << essential_matrix << std::endl;
-    std::cout << points2.size() << " " << points1.size() << std::endl;
+    if (DEBUG) std::cout << points2.size() << " " << points1.size() << std::endl;
     cv::recoverPose(essential_matrix, points2, points1, R, t, focal_length, principal_point, mask);
     if (DEBUG) std::cout << "R is " << std::endl << R << std::endl;
     if (DEBUG) std::cout << "t is " << std::endl << t << std::endl;
@@ -130,7 +130,7 @@ void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
     cv::Mat K = loadCalibrationMatrix(1);
     std::vector<cv::Point3f> points_3d;
     std::vector<cv::Point2f> points_2d;
-
+    std::cout << kps1.size() << " " << kps2.size() << " " << matches.size() << std::endl;
     poseEstimation2D2D(kps1, kps2, matches, mask, R, t);
     std::cout << "after 2D2D" << std::endl;
     std::cout << R << std::endl;

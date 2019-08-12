@@ -29,13 +29,7 @@
 #include <suitesparse/cholmod.h>
 
 #include "cameraParamters.h"
-
-static constexpr double PIXEL_NOISE = 1.0;
-static constexpr double OUTLIER_RATIO = 0.0;
-static constexpr bool ROBUST_KERNEL = true;
-static constexpr bool STRUCTURE_ONLY = false;
-static constexpr bool DENSE = false;
-static constexpr int OPTIMIZE_COUNT = 70;
+#include "constants.h"
 
 int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
                      const std::vector<cv::Point2f> &points_2d,
