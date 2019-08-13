@@ -5,6 +5,7 @@
 #ifndef TOYSLAM_LOADDATA_H
 #define TOYSLAM_LOADDATA_H
 
+#include <fstream>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -21,27 +22,35 @@ class kittiLoader {
 private:
     std::string filenameLeft;
     std::string filenameRight;
+    std::string pose;
+    std::string prevPose;
+    std::ifstream poses;
+
     char tmp[100]{};
     int idx = 0;
 
     void storeString() {
-//        sprintf(tmp, "./tmp/images/00/image_0/%06d.png", idx);
-        sprintf(tmp, "./data/dataset/sequences/00/image_0/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/%02d/image_0/%06d.png", SEQUENCE_NUM, idx);
         filenameLeft = tmp;
-//        sprintf(tmp, "./tmp/images/00/image_1/%06d.png", idx);
-        sprintf(tmp, "./data/dataset/sequences/00/image_1/%06d.png", idx);
+        sprintf(tmp, "./data/dataset/sequences/%02d/image_1/%06d.png", SEQUENCE_NUM, idx);
         filenameRight = tmp;
     }
 
 public:
-    explicit kittiLoader(int idx_) : idx{idx_}{
+    explicit kittiLoader(int idx_) : idx{idx_} {
+        sprintf(tmp, "./data/dataset/poses/%02d.txt", SEQUENCE_NUM);
+        poses = std::ifstream(tmp);
+        if (poses.is_open()) std::getline(poses, pose);
         storeString();
     };
 
-    const std::pair<std::string, std::string> operator*() const { return {filenameLeft, filenameRight}; }
+    std::vector<std::string> operator*() const { return {prevPose, pose, filenameLeft, filenameRight}; }
 
     kittiLoader &operator++() {
         idx++;
+        prevPose = pose;
+        if (poses.is_open()) std::getline(poses, pose);
+        if (DEBUG) std::cout << pose << std::endl;
         storeString();
     }
 
@@ -58,23 +67,24 @@ public:
     }
 };
 
-class kitti_range {
-private:
-    kittiLoader begin_it;
-    int end_n;
-
-public:
-    explicit kitti_range(int end_n_, int begin_n_ = 0)
-            : begin_it{kittiLoader(begin_n_)}, end_n{end_n_ + 1} {};
-
-    kittiLoader begin() {
-        return begin_it;
-    }
-
-    kittiLoader end() {
-        return kittiLoader(end_n);
-    }
-};
+//class kitti_range {
+//private:
+//    kittiLoader begin_it;
+//    int end_n;
+//
+//public:
+//    explicit kitti_range(std::string poses_filepath, int end_n_, int begin_n_ = 0)
+//            : begin_it{kittiLoader(poses_filepath, begin_n_)}, end_n{end_n_ + 1} {
+//    };
+//
+//    kittiLoader begin() {
+//        return begin_it;
+//    }
+//
+//    kittiLoader end() {
+//        return kittiLoader(end_n);
+//    }
+//};
 
 void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out);
 

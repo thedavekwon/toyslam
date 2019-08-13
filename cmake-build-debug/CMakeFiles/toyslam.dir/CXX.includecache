@@ -80,11 +80,9 @@ loadData.h
 constants.h
 /home/vr-lab/Dave/projects/toyslam/constants.h
 
-/home/vr-lab/Dave/projects/toyslam/loadData.cpp
-loadData.h
 /home/vr-lab/Dave/projects/toyslam/loadData.h
-
-/home/vr-lab/Dave/projects/toyslam/loadData.h
+fstream
+-
 iostream
 -
 iterator
@@ -103,12 +101,6 @@ opencv2/imgcodecs.hpp
 -
 constants.h
 /home/vr-lab/Dave/projects/toyslam/constants.h
-
-/home/vr-lab/Dave/projects/toyslam/main.cpp
-bundleAdjustment.h
-/home/vr-lab/Dave/projects/toyslam/bundleAdjustment.h
-featureExtractionandMatching.h
-/home/vr-lab/Dave/projects/toyslam/featureExtractionandMatching.h
 
 /home/vr-lab/Dave/projects/toyslam/motionEstimation.h
 iostream

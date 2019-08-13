@@ -18,7 +18,7 @@
 
 void sequenceFromVideo();
 
-void sequenceFromKitti();
+void sequenceFromKitti2D2D();
 
 void sequenceFromKittiOpticalFlow();
 
@@ -34,5 +34,7 @@ std::vector<cv::DMatch> get_matches_ORB(const cv::Mat &prevDes, const cv::Mat &d
 void
 featureTrackingWithOpticalFlow(const cv::Mat &prevFrame, const cv::Mat &frame, std::vector<cv::Point2f> &prevKeypoints,
                                std::vector<cv::Point2f> &keyPoints, std::vector<uchar> &status);
+
+std::vector<cv::DMatch> filterMatches(const cv::Mat &des, std::vector<cv::DMatch> &matches);
 
 #endif //TOYSLAM_FEATUREEXTRACTIONANDMATCHING_H

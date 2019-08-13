@@ -24,39 +24,29 @@ double loadFocalLength(int type) {
     else return 718.8560;
 }
 
-double loadScale(int frameId, int type) {
-//    std::ifstream poses("./tmp/images/poses/00.txt");
-    std::ifstream poses("./data/dataset/poses/00.txt");
-    std::string info;
-    double x, y, z;
-    double prevX, prevY, prevZ;
-    while (frameId--) {
-        std::getline(poses, info);
-        prevX = x;
-        prevY = y;
-        prevZ = z;
+double loadScale(const std::string &prevPose, const std::string &curPose) {
+    auto prevP = loadPoseXYZ(prevPose);
+    auto curP = loadPoseXYZ(curPose);
 
-        std::istringstream parser(info);
-        for (int j = 0; j < 12; j++) {
-            parser >> z;
-            if (j == 7) y = z;
-            if (j == 3) x = z;
-        }
-    }
-
-    double scale = sqrt(pow(x-prevX, 2) + pow(y-prevY, 2) + pow(z-prevZ, 2)) ;
+    double scale = sqrt(pow(curP.x-prevP.x, 2) + pow(curP.y-prevP.y, 2) + pow(curP.z-prevP.z, 2)) ;
     std::cout << scale << std::endl;
     return scale;
 }
 
-cv::Point2f loadTruePose(int frameId) {
-    std::ifstream poses("./tmp/images/poses/00.txt");
-//    std::ifstream poses("./data/dataset/poses/00.txt");
-    std::string info;
-    float x, y;
-    while (frameId--) std::getline(poses, info);
+cv::Point3f loadPoseXYZ(const std::string &pose) {
+    float x, y, z;
+    std::istringstream parser(pose);
+    for (int j = 0; j < 12; j++) {
+        parser >> z;
+        if (j == 7) y = z;
+        if (j == 3) x = z;
+    }
+    return cv::Point3f(x, y, z);
+}
 
-    std::istringstream parser(info);
+cv::Point2f loadTruePose(const std::string &pose) {
+    float x, y;
+    std::istringstream parser(pose);
     for (int j = 0; j < 12; j++) {
         parser >> y;
         if (j == 3) x = y;

@@ -17,8 +17,10 @@ cv::Point2d loadPrincipalPoint(int type);
 
 double loadFocalLength(int type);
 
-double loadScale(int frameId, int type);
+double loadScale(const std::string &prevPose, const std::string &curPose);
 
-cv::Point2f loadTruePose(int frameId);
+cv::Point2f loadTruePose(const std::string &pose);
+
+cv::Point3f loadPoseXYZ(const std::string &pose);
 
 #endif //TOYSLAM_CAMERAPARAMTERS_H

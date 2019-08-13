@@ -19,7 +19,7 @@ void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out) {
     if (SHOW) cv::imshow("left", left);
     if (SHOW) cv::imshow("right", right);
     if (SHOW) cv::imshow("disparity map", out);
-    if (SHOW) cv::waitKey(0);
+    if (SHOW) cv::waitKey(1);
 }
 
 void loadKittiMono(const std::pair<std::string, std::string> &cur, cv::Mat &out, int type) {
@@ -29,7 +29,7 @@ void loadKittiMono(const std::pair<std::string, std::string> &cur, cv::Mat &out,
         out = cv::imread(cur.second);
     }
     if (SHOW) cv::imshow("mono", out);
-    if (SHOW) cv::waitKey(0);
+    if (SHOW) cv::waitKey(1);
 }
 
 //int main() {
