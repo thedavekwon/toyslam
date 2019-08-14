@@ -51,13 +51,18 @@ void poseEstimation2D2D(const std::vector<cv::KeyPoint> &kps1,
     double focal_length = loadFocalLength(1);
 
     cv::Mat essential_matrix = cv::findEssentialMat(points2, points1, focal_length, principal_point,
-            cv::RANSAC, 0.999, 1.0, mask);
+                                                    cv::RANSAC, 0.99, 0.5, mask);
     if (DEBUG) std::cout << "essential_matrix is " << std::endl << essential_matrix << std::endl;
+    if (DEBUG) std::cout << "Mask: " << std::endl;
+    if (DEBUG) std::cout << mask << std::endl;
 
     cv::Mat homography_matrix = cv::findHomography(points2, points1, cv::RANSAC, 3);
     if (DEBUG) std::cout << "homography_matrix is " << std::endl << homography_matrix << std::endl;
 
-    cv::recoverPose(essential_matrix, points2, points1, R, t, focal_length, principal_point, mask);
+    if (DEBUG) std::cout << "Point1 size: " << points1.size() << "\t" << "Point2 size " << points2.size() << std::endl;
+    int inlier_num = cv::recoverPose(essential_matrix, points2, points1, R, t, focal_length, principal_point);
+
+    std::cout << "Inlier Count: " << inlier_num << std::endl;
     if (DEBUG) std::cout << "R is " << std::endl << R << std::endl;
     if (DEBUG) std::cout << "t is " << std::endl << t << std::endl;
 }
@@ -90,11 +95,11 @@ void triangulation(const std::vector<cv::KeyPoint> &kps1,
     points_2d.clear();
 
     cv::Mat T1 = (cv::Mat_<float>(3, 4) <<
-            1, 0, 0, 0,
+                                        1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0);
     cv::Mat T2 = (cv::Mat_<float>(3, 4) <<
-            R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
+                                        R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
             R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), t.at<double>(1, 0),
             R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), t.at<double>(2, 0));
 

@@ -1,8 +1,7 @@
-#include "bundleAdjustment.h"
-#include "featureExtractionandMatching.h"
+#include "sequences.h"
 
 int main() {
-//    sequenceFromKittiOpticalFlow();
-    sequenceFromKitti2D2D();
+    sequenceFromKittiOpticalFlow();
+//    sequenceFromKitti2D2D();
 }
 

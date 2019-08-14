@@ -1,43 +1,46 @@
 cmake_minimum_required(VERSION 3.14)
 project(toyslam)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 find_package(Eigen REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4 REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(G2O REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SuiteSparse REQUIRED)
 find_package(Cholmod REQUIRED)
 find_package(CSparse REQUIRED)
+find_package(PCL REQUIRED)
 
 LIST(APPEND G2O_LIBRARIES
-    cxsparse
-    cholmod
-    g2o_cli g2o_ext_freeglut_minimal g2o_simulator
-    g2o_solver_slam2d_linear g2o_types_icp g2o_types_slam2d
-    g2o_core g2o_interface g2o_solver_csparse g2o_solver_structure_only
-    g2o_types_sba g2o_types_slam3d g2o_csparse_extension
-    g2o_opengl_helper g2o_solver_dense g2o_stuff
-    g2o_types_sclam2d g2o_parser g2o_solver_pcg
-    g2o_types_data g2o_types_sim3
-)
+        cxsparse
+        cholmod
+        g2o_cli g2o_ext_freeglut_minimal g2o_simulator
+        g2o_solver_slam2d_linear g2o_types_icp g2o_types_slam2d
+        g2o_core g2o_interface g2o_solver_csparse g2o_solver_structure_only
+        g2o_types_sba g2o_types_slam3d g2o_csparse_extension
+        g2o_opengl_helper g2o_solver_dense g2o_stuff
+        g2o_types_sclam2d g2o_parser g2o_solver_pcg
+        g2o_types_data g2o_types_sim3
+        )
 
 #add_executable(toyslam main.cpp)
 add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h
-                                featureExtractionandMatching.cpp featureExtractionandMatching.h
-                                motionEstimation.cpp motionEstimation.h
-                                cameraParamters.cpp cameraParamters.h
-                                loadData.cpp loadData.h
-                                constants.h)
+        featureExtractionandMatching.cpp featureExtractionandMatching.h
+        motionEstimation.cpp motionEstimation.h
+        cameraParamters.cpp cameraParamters.h
+        loadData.cpp loadData.h
+        sequences.cpp sequences.h
+        drawMap.cpp drawMap.h
+        constants.h )
 
 
 add_executable(loadData loadData.cpp loadData.h)
 
 target_link_libraries(toyslam ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
-        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES})
+        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES} ${PCL_LIBRARIES})
 
 target_link_libraries(loadData ${OpenCV_LIBS})

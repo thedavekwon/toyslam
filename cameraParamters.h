@@ -9,7 +9,9 @@
 #include <iostream>
 #include <fstream>
 
-#include <opencv2/core.hpp>
+#include <opencv4/opencv2/core.hpp>
+
+#include "loadData.h"
 
 cv::Mat loadCalibrationMatrix(int type);
 
@@ -18,9 +20,5 @@ cv::Point2d loadPrincipalPoint(int type);
 double loadFocalLength(int type);
 
 double loadScale(const std::string &prevPose, const std::string &curPose);
-
-cv::Point2f loadTruePose(const std::string &pose);
-
-cv::Point3f loadPoseXYZ(const std::string &pose);
 
 #endif //TOYSLAM_CAMERAPARAMTERS_H

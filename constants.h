@@ -11,13 +11,13 @@ const bool ROBUST_KERNEL = true;
 const bool STRUCTURE_ONLY = false;
 const bool DENSE = false;
 const int OPTIMIZE_COUNT = 70;
-const int MAX_FEATURES = 500;
+const int MAX_FEATURES = 2000;
 const float RATIO_THRESH = 0.7f;
 const int MIN_FEATURE_THRESHOLD = 1500;
 const bool FEATURE_DEBUG = false;
 const int FEATURE_TYPE = 1;
 const bool DEBUG = false;
-const bool SHOW = false;
+const bool SHOW = true;
 const int SEQUENCE_NUM = 0;
 
 #endif //TOYSLAM_CONSTANTS_H

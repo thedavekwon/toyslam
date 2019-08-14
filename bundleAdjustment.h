@@ -10,8 +10,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <opencv2/core.hpp>
-#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv4/opencv2/core.hpp>
+#include <opencv4/opencv2/calib3d/calib3d.hpp>
 
 #include <Eigen/StdVector>
 
@@ -32,9 +32,9 @@
 #include "constants.h"
 
 int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
-                     const std::vector<cv::Point2f> &points_2d,
-                     const cv::Mat &K,
-                     cv::Mat &R,
-                     cv::Mat &t);
+                         const std::vector<cv::Point2f> &points_2d,
+                         const cv::Mat &K,
+                         cv::Mat &R,
+                         cv::Mat &t);
 
 #endif //TOYSLAM_BUNDLEADJUSTMENT_H

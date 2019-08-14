@@ -203,7 +203,7 @@ int sampleBA() {
     point_num = 0;
     sum_diff2 = 0;
 
-    for (auto & it : pointid_2_trueid) {
+    for (auto &it : pointid_2_trueid) {
         auto v_it = optimizer.vertices().find(it.first);
         if (v_it == optimizer.vertices().end()) {
             std::cerr << "Vertex " << it.first << " not in graph!" << std::endl;
@@ -227,10 +227,10 @@ int sampleBA() {
 }
 
 int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
-                     const std::vector<cv::Point2f> &points_2d,
-                     const cv::Mat &K,
-                     cv::Mat &R,
-                     cv::Mat &t) {
+                         const std::vector<cv::Point2f> &points_2d,
+                         const cv::Mat &K,
+                         cv::Mat &R,
+                         cv::Mat &t) {
     // optimizer
     g2o::SparseOptimizer optimizer;
     optimizer.setVerbose(DEBUG);
@@ -262,8 +262,8 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
     Eigen::Matrix3d R_mat;
     R_mat <<
           R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2),
-          R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
-           R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
+            R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
+            R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
     pose->setId(0);
     pose->setEstimate(
             g2o::SE3Quat(
@@ -306,7 +306,7 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
 
     t = (cv::Mat_<float>(3, 1) << T(0, 3), T(1, 3), T(2, 3));
     R = (cv::Mat_<float>(3, 3) <<
-            T(0, 0), T(0, 1), T(0, 2),
+                               T(0, 0), T(0, 1), T(0, 2),
             T(1, 0), T(1, 1), T(1, 2),
             T(2, 0), T(2, 1), T(2, 2));
 }

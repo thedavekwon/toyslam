@@ -190,6 +190,33 @@ cameraParamters.cpp.s:
 	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/cameraParamters.cpp.s
 .PHONY : cameraParamters.cpp.s
 
+drawMap.o: drawMap.cpp.o
+
+.PHONY : drawMap.o
+
+# target to build an object file
+drawMap.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/drawMap.cpp.o
+.PHONY : drawMap.cpp.o
+
+drawMap.i: drawMap.cpp.i
+
+.PHONY : drawMap.i
+
+# target to preprocess a source file
+drawMap.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/drawMap.cpp.i
+.PHONY : drawMap.cpp.i
+
+drawMap.s: drawMap.cpp.s
+
+.PHONY : drawMap.s
+
+# target to generate assembly for a file
+drawMap.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/drawMap.cpp.s
+.PHONY : drawMap.cpp.s
+
 featureExtractionandMatching.o: featureExtractionandMatching.cpp.o
 
 .PHONY : featureExtractionandMatching.o
@@ -301,6 +328,33 @@ motionEstimation.cpp.s:
 	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/motionEstimation.cpp.s
 .PHONY : motionEstimation.cpp.s
 
+sequences.o: sequences.cpp.o
+
+.PHONY : sequences.o
+
+# target to build an object file
+sequences.cpp.o:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/sequences.cpp.o
+.PHONY : sequences.cpp.o
+
+sequences.i: sequences.cpp.i
+
+.PHONY : sequences.i
+
+# target to preprocess a source file
+sequences.cpp.i:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/sequences.cpp.i
+.PHONY : sequences.cpp.i
+
+sequences.s: sequences.cpp.s
+
+.PHONY : sequences.s
+
+# target to generate assembly for a file
+sequences.cpp.s:
+	$(MAKE) -f CMakeFiles/toyslam.dir/build.make CMakeFiles/toyslam.dir/sequences.cpp.s
+.PHONY : sequences.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -317,6 +371,9 @@ help:
 	@echo "... cameraParamters.o"
 	@echo "... cameraParamters.i"
 	@echo "... cameraParamters.s"
+	@echo "... drawMap.o"
+	@echo "... drawMap.i"
+	@echo "... drawMap.s"
 	@echo "... featureExtractionandMatching.o"
 	@echo "... featureExtractionandMatching.i"
 	@echo "... featureExtractionandMatching.s"
@@ -329,6 +386,9 @@ help:
 	@echo "... motionEstimation.o"
 	@echo "... motionEstimation.i"
 	@echo "... motionEstimation.s"
+	@echo "... sequences.o"
+	@echo "... sequences.i"
+	@echo "... sequences.s"
 .PHONY : help
 
 

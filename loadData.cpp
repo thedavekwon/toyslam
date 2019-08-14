@@ -32,11 +32,23 @@ void loadKittiMono(const std::pair<std::string, std::string> &cur, cv::Mat &out,
     if (SHOW) cv::waitKey(1);
 }
 
-//int main() {
-//    for (auto &cur : kitti_range(10)) {
-//        std::cout << cur.first << " " << cur.second << std::endl;
-//        cv::Mat out;
-//        //loadKitti(cur, out);
-//        loadKittiMono(cur, out, 0);
-//    }
-//}
+cv::Point3f loadPoseXYZ(const std::string &pose) {
+    float x, y, z;
+    std::istringstream parser(pose);
+    for (int j = 0; j < 12; j++) {
+        parser >> z;
+        if (j == 7) y = z;
+        if (j == 3) x = z;
+    }
+    return cv::Point3f(x, y, z);
+}
+
+cv::Point2f loadTruePose(const std::string &pose) {
+    float x, y;
+    std::istringstream parser(pose);
+    for (int j = 0; j < 12; j++) {
+        parser >> y;
+        if (j == 3) x = y;
+    }
+    return cv::Point2f(x+300, y+100);
+}

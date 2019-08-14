@@ -11,10 +11,10 @@
 #include <string>
 #include <utility>
 
-#include <opencv2/core.hpp>
-#include <opencv2/calib3d.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgcodecs.hpp>
+#include <opencv4/opencv2/core.hpp>
+#include <opencv4/opencv2/calib3d.hpp>
+#include <opencv4/opencv2/highgui.hpp>
+#include <opencv4/opencv2/imgcodecs.hpp>
 
 #include "constants.h"
 
@@ -89,5 +89,9 @@ public:
 void loadKitti(const std::pair<std::string, std::string> &cur, cv::Mat &out);
 
 void loadKittiMono(const std::pair<std::string, std::string> &cur, cv::Mat &out, int type);
+
+cv::Point2f loadTruePose(const std::string &pose);
+
+cv::Point3f loadPoseXYZ(const std::string &pose);
 
 #endif //TOYSLAM_LOADDATA_H
