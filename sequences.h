@@ -12,8 +12,10 @@
 
 void sequenceFromKitti2D2D();
 
+void sequenceFromKitti3D3D();
+
 void sequenceFromKittiOpticalFlow();
 
-void sequenceFromKitti3D3D();
+void sequenceFromKittiOpticalFlow3D();
 
 #endif //TOYSLAM_SEQUENCES_H

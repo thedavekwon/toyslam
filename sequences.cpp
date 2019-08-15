@@ -210,6 +210,97 @@ void sequenceFromKittiOpticalFlow() {
     cv::destroyAllWindows();
 }
 
+void sequenceFromKittiOpticalFlow3D() {
+    int frameCnt = 0;
+    cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
+    cv::Point2f truePose;
+    std::vector<cv::KeyPoint> prevKps;
+    std::vector<cv::Point2f> prevKeyPoints;
+    std::vector<cv::Point2f> keyPoints;
+    std::vector<cv::KeyPoint> kps;
+
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr pointcloud(new pcl::PointCloud<pcl::PointXYZRGB>);
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr filtered_pointcloud(new pcl::PointCloud<pcl::PointXYZRGB>);
+
+    auto K = loadCalibrationMatrix(1);
+
+    auto it = kittiLoader(0);
+    const auto end = kittiLoader(4500);
+
+    while (it != end) {
+        std::cout << "frameId: " << frameCnt << std::endl;
+        cv::Mat frame, kFrame, des;
+        kps.clear();
+
+        auto cur = *it;
+        loadKittiMono({cur[2], cur[3]}, frame, 0);
+        if (frame.empty()) break;
+
+        // cv::imshow("Frame", kFrame);
+        cv::waitKey(1);
+
+        if (frameCnt == 0) {
+            extractFeature(frame, kFrame, kps, keyPoints, des, FEATURE_TYPE);
+        }
+
+        if (frameCnt) {
+            cv::Mat R, t, mask;
+            if (frameCnt == 1) {
+                std::vector<uchar> status;
+                featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                poseEstimationOpticalFlow(prevKeyPoints, keyPoints, mask, R, t);
+                poseR = R.clone();
+                poseT = t.clone();
+            }
+            if (frameCnt > 2) {
+                std::vector<uchar> status;
+                featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                poseEstimationOpticalFlow(prevKeyPoints, keyPoints, mask, R, t);
+
+                auto scale = loadScale(cur[0], cur[1]);
+
+                if (scale > 0.1) {
+                    poseT = poseT + scale * (poseR * t);
+                    poseR = R * poseR;
+                }
+                if (keyPoints.size() < MIN_FEATURE_THRESHOLD) {
+                    if (FEATURE_DEBUG)
+                        std::cout << "before: " << prevKeyPoints.size() << " " << keyPoints.size() << " ";
+                    extractFeature(prevFrame, prevkFrame, prevKps, prevKeyPoints, prevDes, FEATURE_TYPE);
+                    if (FEATURE_DEBUG) std::cout << "after: " << prevKeyPoints.size() << " " << keyPoints.size() << " ";
+                    featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
+                    if (FEATURE_DEBUG)
+                        std::cout << "aafter: " << prevKeyPoints.size() << " " << keyPoints.size() << std::endl;
+                }
+                cv::Mat color = cv::Mat::zeros(frame.size(), CV_8UC3);
+                //draw3D(pointcloud, poseR, poseT, color, frame, K);
+                draw2Don3D(pointcloud, poseR, poseT);
+            }
+            if (SHOW) {
+                cv::Mat img_matches;
+                // cv::imshow("Good Matches", img_matches);
+                cv::waitKey(1);
+            }
+        }
+
+        prevFrame = frame.clone();
+        prevkFrame = kFrame.clone();
+        prevDes = des.clone();
+        if (DEBUG) std::cout << "before copying: " << prevKeyPoints.size() << " " << keyPoints.size() << " ";
+        prevKeyPoints = keyPoints;
+        if (DEBUG) std::cout << "after copying: " << prevKeyPoints.size() << " " << keyPoints.size() << std::endl;
+        prevKps = kps;
+        frameCnt++;
+        ++it;
+    }
+    cv::waitKey(0);
+    cv::destroyAllWindows();
+
+    voxelFiltering(pointcloud, filtered_pointcloud);
+    filtered_pointcloud->is_dense = false;
+    pcl::io::savePCDFileBinary("map.pcd", *filtered_pointcloud);
+}
+
 void sequenceFromKitti3D3D() {
     int frameCnt;
     cv::Mat prevFrame, prevKFrame, prevDes, poseR, poseT;

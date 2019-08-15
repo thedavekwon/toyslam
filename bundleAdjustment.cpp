@@ -262,8 +262,8 @@ int bundleAdjustment3d2d(const std::vector<cv::Point3f> &points_3d,
     Eigen::Matrix3d R_mat;
     R_mat <<
           R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2),
-            R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
-            R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
+          R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2),
+          R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2);
     pose->setId(0);
     pose->setEstimate(
             g2o::SE3Quat(

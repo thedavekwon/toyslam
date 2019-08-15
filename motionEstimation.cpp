@@ -95,11 +95,11 @@ void triangulation(const std::vector<cv::KeyPoint> &kps1,
     points_2d.clear();
 
     cv::Mat T1 = (cv::Mat_<float>(3, 4) <<
-                                        1, 0, 0, 0,
+            1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 1, 0);
     cv::Mat T2 = (cv::Mat_<float>(3, 4) <<
-                                        R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
+            R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
             R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), t.at<double>(1, 0),
             R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), t.at<double>(2, 0));
 
