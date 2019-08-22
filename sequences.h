@@ -5,6 +5,8 @@
 #ifndef TOYSLAM_SEQUENCES_H
 #define TOYSLAM_SEQUENCES_H
 
+#include <algorithm>
+
 #include <opencv4/opencv2/opencv.hpp>
 
 #include "featureExtractionandMatching.h"

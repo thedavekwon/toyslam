@@ -45,8 +45,8 @@ std::vector<cv::DMatch> filterMatches(const cv::Mat &des, std::vector<cv::DMatch
         min_dist = std::min(min_dist, match.distance);
         max_dist = std::max(max_dist, match.distance);
     }
-    if (!DEBUG) std::cout << "Max Distance: " << max_dist << std::endl;
-    if (!DEBUG) std::cout << "Min Distance: " << min_dist << std::endl;
+    if (DEBUG) std::cout << "Max Distance: " << max_dist << std::endl;
+    if (DEBUG) std::cout << "Min Distance: " << min_dist << std::endl;
 
     if (!DEBUG) std::cout << "Before Match Filtering: " << matches.size() << std::endl;
     for (auto &match : matches) {
@@ -64,12 +64,14 @@ std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des, 
 //        cv::Ptr<cv::DescriptorMatcher> matcher  = cv::DescriptorMatcher::create ( "BruteForce-Hamming");
         std::vector<cv::DMatch> matches;
         matcher->match(des, prevDes, matches);
-        return filterMatches(des, matches);;
+        if (MINMAX_FILTER) return filterMatches(des, matches);;
+        return matches;
     } else if (featureType == 2) {
         cv::Ptr<cv::DescriptorMatcher> matcher = cv::DescriptorMatcher::create("BruteForce-Hamming");
         std::vector<cv::DMatch> matches;
         matcher->match(des, prevDes, matches);
-        return filterMatches(des, matches);;
+        if (MINMAX_FILTER) return filterMatches(des, matches);;
+        return matches;
     } else if (featureType == 3 || featureType == 4) {
         cv::Ptr<cv::DescriptorMatcher> matcher = cv::DescriptorMatcher::create(cv::DescriptorMatcher::FLANNBASED);
         std::vector<std::vector<cv::DMatch>> knn_matches;
@@ -80,7 +82,8 @@ std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des, 
                 good_matches.push_back(knn_match[0]);
             }
         }
-        return filterMatches(des, good_matches);;
+        if (MINMAX_FILTER) return filterMatches(des, good_matches);;
+        return good_matches;
     }
 }
 
@@ -92,7 +95,7 @@ featureTrackingWithOpticalFlow(const cv::Mat &prevFrame, const cv::Mat &frame, s
     auto winSize = cv::Size(5, 5);
     // termination criteria for iterative algorithms
     // default criterion for the calcOpticalFlowPyrLK
-    auto criterion = cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 100, 0.01);
+    auto criterion = cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, 60, 0.01);
     // Calculates an optical flow for a sparse feature set using the iterative Lucas-Kanade method with pyramids.
     if (DEBUG) std::cout << "before tracking: " << prevKeypoints.size() << " " << keyPoints.size() << std::endl;
     cv::calcOpticalFlowPyrLK(prevFrame, frame, prevKeypoints, keyPoints, status, error, winSize, 5, criterion, 0,

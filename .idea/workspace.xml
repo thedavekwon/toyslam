@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="toyslam" targetName="loadData" />
       <config projectName="toyslam" targetName="toyslam" />
+      <config projectName="toyslam" targetName="loadData" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -13,16 +13,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c8ec786-53c5-494c-bd34-5a605ae22bfd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bundleAdjustment.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/bundleAdjustment.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/toyslam.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/toyslam" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/toyslam" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawMap.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/drawMap.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drawMap.h" beforeDir="false" afterPath="$PROJECT_DIR$/drawMap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/constants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/featureExtractionandMatching.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/featureExtractionandMatching.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/motionEstimation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/motionEstimation.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sequences.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/sequences.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sequences.h" beforeDir="false" afterPath="$PROJECT_DIR$/sequences.h" afterDir="false" />
     </list>
@@ -45,7 +42,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/joinMap" />
+    <property name="last_opened_file_path" value="$USER_HOME$/slambook/ch12" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -118,6 +115,7 @@
       <workItem from="1565808814103" duration="5392000" />
       <workItem from="1565814675610" duration="1390000" />
       <workItem from="1565886266942" duration="9408000" />
+      <workItem from="1566498289380" duration="3275000" />
     </task>
     <servers />
   </component>

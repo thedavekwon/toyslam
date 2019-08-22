@@ -99,14 +99,14 @@ void sequenceFromKitti2D2D() {
             if (frameCnt > 2) {
                 auto scale = loadScale(cur[0], cur[1]);
 
-                if (scale > 0.1) {
+                if (scale > SCALE_THRESHOLD) {
                     poseT = poseT + scale * (poseR * t);
                     poseR = R * poseR;
                 }
 
                 draw2D(poseT, trajectory, cur);
             }
-            if (SHOW) {
+            if (!SHOW) {
                 cv::Mat img_matches;
                 cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
                                 cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
@@ -127,6 +127,9 @@ void sequenceFromKitti2D2D() {
 }
 
 void sequenceFromKittiOpticalFlow() {
+    // for visualization
+    cv::RNG rng;
+
     int frameCnt = 0;
     cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
     cv::Point2f truePose;
@@ -134,6 +137,7 @@ void sequenceFromKittiOpticalFlow() {
     std::vector<cv::Point2f> prevKeyPoints;
     std::vector<cv::Point2f> keyPoints;
     std::vector<cv::KeyPoint> kps;
+    std::vector<uchar> status;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
 //    cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
@@ -168,13 +172,12 @@ void sequenceFromKittiOpticalFlow() {
                 poseT = t.clone();
             }
             if (frameCnt > 2) {
-                std::vector<uchar> status;
                 featureTrackingWithOpticalFlow(prevFrame, frame, prevKeyPoints, keyPoints, status);
                 poseEstimationOpticalFlow(prevKeyPoints, keyPoints, mask, R, t);
 
                 auto scale = loadScale(cur[0], cur[1]);
 
-                if (scale > 0.1) {
+                if (scale > SCALE_THRESHOLD) {
                     poseT = poseT + scale * (poseR * t);
                     poseR = R * poseR;
                 }
@@ -189,9 +192,24 @@ void sequenceFromKittiOpticalFlow() {
                 }
                 draw2D(poseT, trajectory, cur);
             }
-            if (SHOW) {
-                cv::Mat img_matches;
-                // cv::imshow("Good Matches", img_matches);
+            if (SHOW && frameCnt > 2) {
+                cv::Mat img_matches = cv::Mat::zeros(frame.size(), frame.type());
+                int cnt = 0;
+                for (int i = 0; i < prevKeyPoints.size(); i++) {
+                    if (status[i] == 1) {
+                        if (cnt % 10 != 0) {
+                            cnt++;
+                            continue;
+                        }
+                        auto color = cv::Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
+                        cv::arrowedLine(img_matches, keyPoints[i], prevKeyPoints[i], color, 2);
+                        cv::circle(frame, keyPoints[i], 5, color, -1);
+                        cnt++;
+                    }
+                }
+                cv::Mat img;
+                add(frame, img_matches, img);
+                cv::imshow("Good Matches", img);
                 cv::waitKey(1);
             }
         }
