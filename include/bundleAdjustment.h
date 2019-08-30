@@ -13,8 +13,6 @@
 #include <opencv4/opencv2/core.hpp>
 #include <opencv4/opencv2/calib3d/calib3d.hpp>
 
-#include <Eigen/StdVector>
-
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/solvers/cholmod/linear_solver_cholmod.h>
 #include <g2o/core/block_solver.h>

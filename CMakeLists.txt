@@ -27,7 +27,10 @@ LIST(APPEND G2O_LIBRARIES
         g2o_types_data g2o_types_sim3
         )
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(
+        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/include
+)
 
 add_library(${PROJECT_NAME} SHARED
         src/bundleAdjustment.cpp
@@ -40,5 +43,7 @@ add_library(${PROJECT_NAME} SHARED
 
 add_executable(main src/main.cpp)
 
-target_link_libraries(main ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
-        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
+        ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES} ${PCL_LIBRARIES} )
+
+target_link_libraries(main ${PROJECT_NAME})

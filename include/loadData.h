@@ -30,15 +30,15 @@ private:
     int idx = 0;
 
     void storeString() {
-        sprintf(tmp, "./data/dataset/sequences/%02d/image_0/%06d.png", SEQUENCE_NUM, idx);
+        sprintf(tmp, "../data/dataset/sequences/%02d/image_0/%06d.png", SEQUENCE_NUM, idx);
         filenameLeft = tmp;
-        sprintf(tmp, "./data/dataset/sequences/%02d/image_1/%06d.png", SEQUENCE_NUM, idx);
+        sprintf(tmp, "../data/dataset/sequences/%02d/image_1/%06d.png", SEQUENCE_NUM, idx);
         filenameRight = tmp;
     }
 
 public:
     explicit kittiLoader(int idx_) : idx{idx_} {
-        sprintf(tmp, "./data/dataset/poses/%02d.txt", SEQUENCE_NUM);
+        sprintf(tmp, "../data/dataset/poses/%02d.txt", SEQUENCE_NUM);
         poses = std::ifstream(tmp);
         if (poses.is_open()) std::getline(poses, pose);
         storeString();
