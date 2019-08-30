@@ -27,20 +27,18 @@ LIST(APPEND G2O_LIBRARIES
         g2o_types_data g2o_types_sim3
         )
 
-#add_executable(toyslam main.cpp)
-add_executable(toyslam main.cpp bundleAdjustment.cpp bundleAdjustment.h
-        featureExtractionandMatching.cpp featureExtractionandMatching.h
-        motionEstimation.cpp motionEstimation.h
-        cameraParamters.cpp cameraParamters.h
-        loadData.cpp loadData.h
-        sequences.cpp sequences.h
-        drawMap.cpp drawMap.h
-        constants.h )
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
+add_library(${PROJECT_NAME} SHARED
+        src/bundleAdjustment.cpp
+        src/featureExtractionandMatching.cpp
+        src/motionEstimation.cpp
+        src/cameraParamters.cpp
+        src/loadData.cpp
+        src/sequences.cpp
+        src/drawMap.cpp)
 
-add_executable(loadData loadData.cpp loadData.h)
+add_executable(main src/main.cpp)
 
-target_link_libraries(toyslam ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
+target_link_libraries(main ${SDL2_LIBRARIES} ${OpenCV_LIBS} ${Pangolin_LIBRARIES} ${G2O_LIBRARIES}
         ${SuiteSparse_LIBRARIES} ${Cholmod_LIBRARIES} ${Eigen_LIBRARIES} ${CSparse_LIBRARIES} ${PCL_LIBRARIES})
-
-target_link_libraries(loadData ${OpenCV_LIBS})
