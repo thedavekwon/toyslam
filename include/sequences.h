@@ -7,12 +7,14 @@
 
 #include <algorithm>
 
-#include <opencv4/opencv2/opencv.hpp>
+#include <opencv2/opencv.hpp>
 
 #include "featureExtractionandMatching.h"
 #include "drawMap.h"
 
 void sequenceFromKitti2D2D();
+
+void sequenceFromKitti3D2D();
 
 void sequenceFromKitti3D3D();
 

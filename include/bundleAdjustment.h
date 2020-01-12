@@ -10,8 +10,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include <opencv4/opencv2/core.hpp>
-#include <opencv4/opencv2/calib3d/calib3d.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
 
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/solvers/cholmod/linear_solver_cholmod.h>

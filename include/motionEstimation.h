@@ -6,10 +6,10 @@
 #define TOYSLAM_MOTIONESTIMATION_H
 
 #include <iostream>
-#include <opencv4/opencv2/core/core.hpp>
-#include <opencv4/opencv2/features2d/features2d.hpp>
-#include <opencv4/opencv2/highgui/highgui.hpp>
-#include <opencv4/opencv2/calib3d/calib3d.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
 
 #include "cameraParamters.h"
 #include "bundleAdjustment.h"
@@ -31,14 +31,14 @@ void poseEstimation3D2D(const std::vector<cv::KeyPoint> &kps1,
                         cv::Mat &R,
                         cv::Mat &t);
 
-void triangulation(const std::vector<cv::KeyPoint> &kps1,
-                   const std::vector<cv::KeyPoint> &kps2,
-                   const std::vector<cv::DMatch> &matches,
-                   const cv::Mat &K,
-                   const cv::Mat &R,
-                   const cv::Mat &t,
-                   std::vector<cv::Point3f> &points_3d,
-                   std::vector<cv::Point3f> &points_2d);
+void poseEstimation3D2D(const std::vector<cv::KeyPoint> &kps1,
+                        const std::vector<cv::KeyPoint> &kps2,
+                        const std::vector<cv::DMatch> &matches,
+                        const cv::Mat &K,
+                        cv::Mat &R,
+                        cv::Mat &t,
+                        std::vector<cv::Point3f> &points_3d,
+                        std::vector<cv::Point2f> &points_2d);
 
 void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
                                          const std::vector<cv::KeyPoint> &kps2,
@@ -53,4 +53,12 @@ void poseEstimationOpticalFlow(const std::vector<cv::Point2f> &points1,
                                cv::Mat &R,
                                cv::Mat &t);
 
+void triangulation(const std::vector<cv::KeyPoint> &kps1,
+                   const std::vector<cv::KeyPoint> &kps2,
+                   const std::vector<cv::DMatch> &matches,
+                   const cv::Mat &K,
+                   const cv::Mat &R,
+                   const cv::Mat &t,
+                   std::vector<cv::Point3f> &points_3d,
+                   std::vector<cv::Point2f> &points_2d);
 #endif //TOYSLAM_MOTIONESTIMATION_H

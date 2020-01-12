@@ -50,7 +50,7 @@ std::vector<cv::DMatch> filterMatches(const cv::Mat &des, std::vector<cv::DMatch
 
     if (!DEBUG) std::cout << "Before Match Filtering: " << matches.size() << std::endl;
     for (auto &match : matches) {
-        if (match.distance <= std::max(2 * min_dist, 40.0f)) {
+        if (match.distance <= std::max(2 * min_dist, 30.0f)) {
             filtered_matches.push_back(match);
         }
     }
@@ -75,15 +75,15 @@ std::vector<cv::DMatch> get_matches(const cv::Mat &prevDes, const cv::Mat &des, 
     } else if (featureType == 3 || featureType == 4) {
         cv::Ptr<cv::DescriptorMatcher> matcher = cv::DescriptorMatcher::create(cv::DescriptorMatcher::FLANNBASED);
         std::vector<std::vector<cv::DMatch>> knn_matches;
-        matcher->knnMatch(des, prevDes, knn_matches, 5);
-        std::vector<cv::DMatch> good_matches;
+        matcher->knnMatch(des, prevDes, knn_matches, 2);
+        std::vector<cv::DMatch> matches;
         for (auto &knn_match : knn_matches) {
             if (knn_match[0].distance < RATIO_THRESH * knn_match[1].distance) {
-                good_matches.push_back(knn_match[0]);
+                matches.push_back(knn_match[0]);
             }
         }
-        if (MINMAX_FILTER) return filterMatches(des, good_matches);;
-        return good_matches;
+        if (MINMAX_FILTER) return filterMatches(des, matches);;
+        return matches;
     }
 }
 

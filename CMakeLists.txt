@@ -12,8 +12,8 @@ find_package(G2O REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SuiteSparse REQUIRED)
 find_package(Cholmod REQUIRED)
-find_package(CSparse REQUIRED)
 find_package(PCL REQUIRED)
+find_package(CSparse REQUIRED)
 
 LIST(APPEND G2O_LIBRARIES
         cxsparse

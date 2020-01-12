@@ -28,7 +28,7 @@ void loadKittiMono(const std::pair<std::string, std::string> &cur, cv::Mat &out,
     } else {
         out = cv::imread(cur.second);
     }
-    if (SHOW) cv::imshow("mono", out);
+    if (RAWSHOW) cv::imshow("mono", out);
     if (SHOW) cv::waitKey(1);
 }
 

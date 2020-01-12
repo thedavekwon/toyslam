@@ -9,9 +9,9 @@
 #include <limits>
 #include <string>
 
-#include <opencv4/opencv2/opencv.hpp>
-#include <opencv4/opencv2/features2d.hpp>
-#include <opencv4/opencv2/xfeatures2d.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
 
 #include "motionEstimation.h"
 #include "loadData.h"

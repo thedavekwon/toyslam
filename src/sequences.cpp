@@ -9,7 +9,7 @@ void sequenceFromKitti3D2D() {
     cv::Mat prevFrame, prevKFrame, prevDes;
     cv::Mat poseR, poseT;
     cv::Point2f truePose;
-    cv::Mat K = loadCalibrationMatrix(1);
+    cv::Mat K = loadCalibrationMatrixKitti();
 
     std::vector<cv::KeyPoint> prev2Kps, prevKps, kps;
     std::vector<cv::Point2f> keyPoints;
@@ -33,8 +33,7 @@ void sequenceFromKitti3D2D() {
             prev2Frame = frame;
             prev2KFrame = kFrame;
             prev2Des = des;
-        }
-        if (frameCnt) {
+        } else {
             cv::Mat R, t, mask;
             if (frameCnt == 1) {
                 extractFeature(frame, kFrame, kps, keyPoints, des, FEATURE_TYPE);
@@ -48,7 +47,6 @@ void sequenceFromKitti3D2D() {
                 std::vector<cv::Point2f> points_2d;
                 std::vector<cv::DMatch> good_matches = get_matches(prev2Des, des, FEATURE_TYPE);
 //                triangulation(prev2Kps, prevKps, good_matches, K, R, t, points_3d, points_2d);
-
                 if (frameCnt == 2) {
                     poseR = R.clone();
                     poseT = t.clone();
@@ -64,10 +62,10 @@ void sequenceFromKitti2D2D() {
     int frameCnt = 0;
     cv::Mat prevFrame, prevKFrame, prevDes, poseR, poseT;
     cv::Point2f truePose;
-    std::vector<cv::KeyPoint> prevKps;
+    std::vector <cv::KeyPoint> prevKps, kps;
+    std::vector <cv::Point2f> prevKeyPoints, keyPoints;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
-    //cv::rectangle(trajectory, cv::Point(10, 10), cv::Point(550, 550), CV_RGB(0, 0, 0), cv::FILLED);
     cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
     auto it = kittiLoader(0);
@@ -76,27 +74,29 @@ void sequenceFromKitti2D2D() {
     while (it != end) {
         std::cout << "frameId: " << frameCnt << std::endl;
         cv::Mat frame, KFrame, des;
-        std::vector<cv::KeyPoint> kps;
+        kps.clear();
+        keyPoints.clear();
+
         auto cur = *it;
         loadKittiMono({cur[2], cur[3]}, frame, 0);
         if (frame.empty()) break;
 
-        std::vector<cv::Point2f> keyPoints;
         extractFeature(frame, KFrame, kps, keyPoints, des, FEATURE_TYPE);
 
-        cv::imshow("Frame", KFrame);
-        cv::waitKey(1);
+        if (SHOW) {
+            cv::imshow("Frame", KFrame);
+            cv::waitKey(1);
+        }
 
         if (frameCnt) {
-            std::vector<cv::DMatch> good_matches = get_matches(prevDes, des, FEATURE_TYPE);
+            auto good_matches = get_matches(prevDes, des, FEATURE_TYPE);
 
             cv::Mat R, t, mask;
             poseEstimation2D2D(prevKps, kps, good_matches, mask, R, t);
             if (frameCnt == 1) {
                 poseR = R.clone();
                 poseT = t.clone();
-            }
-            if (frameCnt > 2) {
+            } else {
                 auto scale = loadScale(cur[0], cur[1]);
 
                 if (scale > SCALE_THRESHOLD) {
@@ -105,19 +105,23 @@ void sequenceFromKitti2D2D() {
                 }
 
                 draw2D(poseT, trajectory, cur);
-            }
-            if (!SHOW) {
-                cv::Mat img_matches;
-                cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
-                                cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
-                cv::imshow("Good Matches", img_matches);
-                cv::waitKey(0);
+                if (SHOW) {
+                    cv::Mat img_matches;
+                    std::cout << "KeyPoint1 Size: " << prevKps.size() << " KeyPoint2 Size: " << kps.size() << std::endl;
+                    std::cout << "Matches Size: " << good_matches.size() << std::endl;
+                    cv::drawMatches(prevFrame, prevKps, frame, kps, good_matches, img_matches, cv::Scalar::all(-1),
+                                    cv::Scalar::all(-1), std::vector<char>(),
+                                    cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+                    cv::imshow("Good Matches", img_matches);
+                    cv::waitKey(1);
+                }
             }
         }
 
         prevFrame = frame.clone();
         prevKFrame = KFrame.clone();
         prevDes = des.clone();
+        prevKeyPoints = keyPoints;
         prevKps = kps;
         frameCnt++;
         ++it;
@@ -133,14 +137,11 @@ void sequenceFromKittiOpticalFlow() {
     int frameCnt = 0;
     cv::Mat prevFrame, prevkFrame, prevDes, poseR, poseT;
     cv::Point2f truePose;
-    std::vector<cv::KeyPoint> prevKps;
-    std::vector<cv::Point2f> prevKeyPoints;
-    std::vector<cv::Point2f> keyPoints;
-    std::vector<cv::KeyPoint> kps;
+    std::vector<cv::KeyPoint> prevKps, kps;
+    std::vector<cv::Point2f> prevKeyPoints, keyPoints;
     std::vector<uchar> status;
 
     cv::Mat trajectory = cv::Mat::zeros(600, 600, CV_8UC3);
-//    cv::rectangle(trajectory, cv::Point(10, 30), cv::Point(550, 50), CV_RGB(0, 0, 0), cv::FILLED);
     cv::namedWindow("Trajectory", cv::WINDOW_AUTOSIZE);
 
     auto it = kittiLoader(0);

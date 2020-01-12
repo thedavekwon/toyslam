@@ -14,8 +14,23 @@
   <component name="ChangeListManager">
     <list default="true" id="0c8ec786-53c5-494c-bd34-5a605ae22bfd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/bundleAdjustment.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/bundleAdjustment.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/cameraParamters.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/cameraParamters.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/constants.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/constants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/drawMap.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/drawMap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/featureExtractionandMatching.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/featureExtractionandMatching.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/loadData.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/loadData.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/motionEstimation.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/motionEstimation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/sequences.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/sequences.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cameraParamters.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/cameraParamters.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/featureExtractionandMatching.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/featureExtractionandMatching.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loadData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/loadData.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/motionEstimation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/motionEstimation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sequences.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/sequences.cpp" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +45,11 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectId" id="1OZncklCFY9WARKyD0KltiCuBXq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -38,18 +58,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RunManager" selected="CMake Application.main">
     <configuration name="loadData" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="toyslam" TARGET_NAME="loadData" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="toyslam" RUN_TARGET_NAME="loadData">
@@ -72,6 +81,18 @@
       <item itemvalue="CMake Application.main" />
       <item itemvalue="CMake Application.toyslam" />
     </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -119,6 +140,12 @@
       <workItem from="1567180196902" duration="3584000" />
       <workItem from="1567184611735" duration="316000" />
       <workItem from="1567185007420" duration="1135000" />
+      <workItem from="1577937683193" duration="695000" />
+      <workItem from="1577939056994" duration="685000" />
+      <workItem from="1577947169264" duration="277000" />
+      <workItem from="1578322368260" duration="1007000" />
+      <workItem from="1578730259690" duration="10874000" />
+      <workItem from="1578818626945" duration="1613000" />
     </task>
     <servers />
   </component>
@@ -160,5 +187,59 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="503" height="646" key="DebuggerActiveHint" timestamp="1578745417513">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="503" height="646" key="DebuggerActiveHint/0.27.1920.1053@0.27.1920.1053" timestamp="1578745417513" />
+    <state width="1874" height="467" key="GridCell.Tab.0.bottom" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.0.center" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.0.left" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.0.right" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.1.bottom" timestamp="1578820240453">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240453" />
+    <state width="1874" height="467" key="GridCell.Tab.1.center" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.1.left" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state width="1874" height="467" key="GridCell.Tab.1.right" timestamp="1578820240452">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1874" height="467" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1578820240452" />
+    <state x="449" y="188" key="SettingsEditor" timestamp="1578745701242">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="449" y="188" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1578745701242" />
+    <state x="614" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1578818627836">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="614" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1578818627836" />
+    <state x="597" y="273" width="725" height="560" key="find.popup" timestamp="1578819800115">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="597" y="273" width="725" height="560" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1578819800115" />
+    <state x="685" y="460" width="540" height="186" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1577939604704">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="685" y="460" width="540" height="186" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1577939604704" />
   </component>
 </project>

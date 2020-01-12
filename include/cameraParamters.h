@@ -9,11 +9,13 @@
 #include <iostream>
 #include <fstream>
 
-#include <opencv4/opencv2/core.hpp>
+#include <opencv2/core.hpp>
 
 #include "loadData.h"
 
 cv::Mat loadCalibrationMatrix(int type);
+
+cv::Mat loadCalibrationMatrixKitti();
 
 cv::Point2d loadPrincipalPoint(int type);
 

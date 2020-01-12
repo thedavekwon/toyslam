@@ -34,32 +34,32 @@ void poseEstimation2D2D(const std::vector<cv::KeyPoint> &kps1,
                         cv::Mat &mask,
                         cv::Mat &R,
                         cv::Mat &t) {
-    cv::Mat K = loadCalibrationMatrix(1);
+//    cv::Mat K = loadCalibrationMatrixKitti();
 
     std::vector<cv::Point2f> points1;
     std::vector<cv::Point2f> points2;
 
     for (auto &match : matches) {
-        points1.push_back(kps1[match.queryIdx].pt);
-        points2.push_back(kps2[match.trainIdx].pt);
+        points1.push_back(kps1[match.trainIdx].pt);
+        points2.push_back(kps2[match.queryIdx].pt);
     }
 
-    cv::Mat fundamental_matrix = cv::findFundamentalMat(points1, points2, cv::FM_RANSAC);
-    if (DEBUG) std::cout << "fundamental matrix is " << std::endl << fundamental_matrix << std::endl;
+//    cv::Mat fundamental_matrix = cv::findFundamentalMat(points1, points2, cv::FM_RANSAC);
+//    if (DEBUG) std::cout << "fundamental matrix is " << std::endl << fundamental_matrix << std::endl;
 
     cv::Point2d principal_point = loadPrincipalPoint(1);
     double focal_length = loadFocalLength(1);
 
     cv::Mat essential_matrix = cv::findEssentialMat(points2, points1, focal_length, principal_point,
-                                                    cv::RANSAC, 0.99, 0.5, mask);
+                                                    cv::RANSAC, 0.999, 1.0, mask);
     if (DEBUG) std::cout << "essential_matrix is " << std::endl << essential_matrix << std::endl;
     if (DEBUG) std::cout << "Mask: " << std::endl;
     if (DEBUG) std::cout << mask << std::endl;
 
-    cv::Mat homography_matrix = cv::findHomography(points2, points1, cv::RANSAC, 3);
-    if (DEBUG) std::cout << "homography_matrix is " << std::endl << homography_matrix << std::endl;
-
-    if (DEBUG) std::cout << "Point1 size: " << points1.size() << "\t" << "Point2 size " << points2.size() << std::endl;
+//    cv::Mat homography_matrix = cv::findHomography(points2, points1, cv::RANSAC, 3);
+//    if (DEBUG) std::cout << "homography_matrix is " << std::endl << homography_matrix << std::endl;
+//
+//    if (DEBUG) std::cout << "Point1 size: " << points1.size() << "\t" << "Point2 size " << points2.size() << std::endl;
     int inlier_num = cv::recoverPose(essential_matrix, points2, points1, R, t, focal_length, principal_point);
 
     std::cout << "Inlier Count: " << inlier_num << std::endl;
@@ -132,7 +132,7 @@ void poseEstimation3D2DwithTriangulation(const std::vector<cv::KeyPoint> &kps1,
                                          cv::Mat &mask,
                                          cv::Mat &R,
                                          cv::Mat &t) {
-    cv::Mat K = loadCalibrationMatrix(1);
+    cv::Mat K = loadCalibrationMatrixKitti();
     std::vector<cv::Point3f> points_3d;
     std::vector<cv::Point2f> points_2d;
     std::cout << kps1.size() << " " << kps2.size() << " " << matches.size() << std::endl;

@@ -9,8 +9,8 @@
 #include <iostream>
 #include <string>
 
-#include <opencv4/opencv2/opencv.hpp>
-#include <opencv4/opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <Eigen/Geometry>
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
